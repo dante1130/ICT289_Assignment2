@@ -1,12 +1,9 @@
 #include <GL/freeglut.h>
 
-typedef GLfloat point2[2]; // declare a point data type
-typedef GLfloat point3[3];
-
 void myInit()
 {
     // set attributes
-    glClearColor(1.0, 1.0, 1.0, 1.0); // white background
+    glClearColor(0.0, 0.0, 0.0, 0.0); // white background
     glColor3f(0.0, 0.0, 1.0); // draw red
     glLineWidth(1.0); // draw with 5 pixel wide
 

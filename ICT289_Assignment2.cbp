@@ -31,6 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Object.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Object.h" />
+		<Unit filename="OffLoader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="OffLoader.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

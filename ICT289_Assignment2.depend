@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1615653352 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+	<GL/freeglut.h>
+
+1616481493 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
+	"Vector3.h"
+
+1616480296 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+
+1616481499 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+	<stdio.h>
+	"Object3D.h"
+
+1616481539 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+	<stdlib.h>
+	<math.h>
+	<GL/freeglut.h>
+	"Vector3.h"
+
+1616480495 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.c
+	"OffLoader.h"
+
+1616481518 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.h
+	<stdio.h>
+	"Object3D.h"
+

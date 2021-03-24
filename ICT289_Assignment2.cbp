@@ -31,14 +31,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Object.c">
+		<Unit filename="Camera.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Object.h" />
+		<Unit filename="Camera.h" />
+		<Unit filename="GameObject.h" />
+		<Unit filename="Object3D.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Object3D.h" />
 		<Unit filename="OffLoader.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="OffLoader.h" />
+		<Unit filename="Vector3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Vector3.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

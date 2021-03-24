@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1615653352 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1616495301 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
+	"Camera.h"
 
 1616481493 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
 	"Vector3.h"
 
-1616480296 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+1616492321 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
 
 1616481499 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
 	<stdio.h>
@@ -23,4 +24,11 @@
 1616481518 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.h
 	<stdio.h>
 	"Object3D.h"
+
+1616495244 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+	"Camera.h"
+	<stdio.h>
+
+1616493496 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
+	"Vector3.h"
 

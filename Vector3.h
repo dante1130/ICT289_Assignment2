@@ -1,20 +1,84 @@
 #ifndef VERTEX3_H_INCLUDED
 #define VERTEX3_H_INCLUDED
 
+/** \struct Vector3
+ *
+ * Represents a displacement in a 3D space.
+ *
+ */
 typedef struct Vector3
 {
     float x, y, z;
 } Vector3;
 
+/** \brief Adds the values of 2 vectors.
+ *
+ * \param Vector3
+ * \param Vector3
+ * \return Vector3
+ *
+ */
 Vector3 Add(Vector3 vector1, Vector3 vector2);
+
+/** \brief Subtracts the values of 2 vectors.
+ *
+ * \param Vector3
+ * \param Vector3
+ * \return Vector3
+ *
+ */
 Vector3 Substract(Vector3 vector1, Vector3 vector2);
+
+/** \brief Multiply the values of a vector by a scalar.
+ *
+ * \param Vector3
+ * \param Vector3
+ * \return Vector3
+ *
+ */
 Vector3 Multiply(Vector3 vector, int scalar);
+
+/** \brief Divide the values of a vector by a scalar.
+ *
+ * \param Vector3
+ * \param Vector3
+ * \return Vector3
+ *
+ */
 Vector3 Divide(Vector3 vector, int scalar);
 
+/** \brief Calculates the magnitude of a vector.
+ *
+ * \param Vector3
+ * \return float
+ *
+ */
 float Magnitude(Vector3 vector);
+
+/** \brief Normalizes the vector.
+ *
+ * \param Vector3
+ * \return Vector3
+ *
+ */
 Vector3 Normalize(Vector3 vector);
 
+/** \brief Calculates the dot product of 2 vectors.
+ *
+ * \param Vector3
+ * \param Vector3
+ * \return float
+ *
+ */
 float DotProduct(Vector3 vector1, Vector3 vector2);
+
+/** \brief Calculates the cross product of 2 vectors.
+ *
+ * \param Vector3
+ * \param Vector3
+ * \return Vector3
+ *
+ */
 Vector3 CrossProduct(Vector3 vector1, Vector3 vector2);
 
 

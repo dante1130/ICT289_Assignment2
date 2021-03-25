@@ -3,12 +3,14 @@
 
 void drawObject3D(Object3D obj3D)
 {
-    glBegin(GL_POLYGON);
-    for (int i = 0; i < obj3D.nvert; i++)
+    for (int i = 0; i < obj3D.nfaces; ++i)
     {
-        glVertex3f(obj3D.vertices[i].x, obj3D.vertices[i].y, obj3D.vertices[i].z);
+        glBegin(GL_POLYGON);
+            glVertex3f(obj3D.vertices[obj3D.faces[i].points[0]].x, obj3D.vertices[obj3D.faces[i].points[0]].y, obj3D.vertices[obj3D.faces[i].points[0]].z);
+            glVertex3f(obj3D.vertices[obj3D.faces[i].points[1]].x, obj3D.vertices[obj3D.faces[i].points[1]].y, obj3D.vertices[obj3D.faces[i].points[1]].z);
+            glVertex3f(obj3D.vertices[obj3D.faces[i].points[2]].x, obj3D.vertices[obj3D.faces[i].points[2]].y, obj3D.vertices[obj3D.faces[i].points[2]].z);
+        glEnd();
     }
-    glEnd();
 }
 
 void freeObject3D(Object3D obj3D)

@@ -4,9 +4,10 @@
 const int windowWidth = 1280;
 const int windowHeight = 720;
 
+const float cameraSpeed = 0.1;
+
 Camera camera;
 
-const float cameraSpeed = 0.1;
 
 void init()
 {
@@ -37,8 +38,9 @@ void display()
 
     glLoadIdentity();
     gluLookAt(camera.eye.x, camera.eye.y, camera.eye.z,
-              camera.center.x, camera.center.y, camera.center.z,
+              camera.eye.x + camera.center.x, camera.center.y, camera.eye.z + camera.center.z,
               camera.up.x, camera.up.y, camera.up.z);
+
 
     // Sample object to test
     glutWireTeapot(1.0);
@@ -71,10 +73,27 @@ void keys(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
+void specialKeys(int key, int x, int y)
+{
+    switch (key)
+    {
+    case GLUT_KEY_LEFT:
+        LookLeft(&camera);
+        break;
+
+    case GLUT_KEY_RIGHT:
+        LookRight(&camera);
+        break;
+    }
+
+    // Redisplay the window content
+    glutPostRedisplay();
+}
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv); // Initialization of GLUT
-    glutInitWindowSize(windowWidth, windowHeight); // 500 x 500 pixels window
+    glutInitWindowSize(windowWidth, windowHeight); // 1280 x 720 pixels window
     glutInitWindowPosition(0, 0); // place at top left of the window display
     glutCreateWindow("Shooting range"); // Names the window title
 
@@ -82,7 +101,8 @@ int main(int argc, char **argv)
 
     init(); // initialize attributes
     glutDisplayFunc(display); // callback that is invoked when window is displayed
-    glutKeyboardFunc(keys); // interaction with keyboard
+    glutKeyboardFunc(keys); // interaction with WASD keys
+    glutSpecialFunc(specialKeys); // interaction with arrow keys
 
     glutMainLoop(); // enter event loop
 

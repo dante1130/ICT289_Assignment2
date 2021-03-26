@@ -8,7 +8,7 @@
  * A struct used to be used in conjunction
  * with the function gluLookAt by storing
  * its parameters in the struct, it also
- * contains function that simulates movement.
+ * contains functions that simulates movement.
  *
  */
 typedef struct Camera
@@ -16,6 +16,10 @@ typedef struct Camera
     Vector3 eye;
     Vector3 center;
     Vector3 up;
+
+    float yaw, pitch;
+
+    float angle;
 } Camera;
 
 /** \brief Creates a camera object.
@@ -80,5 +84,6 @@ void MoveLeft(Camera *camera, float speed);
  *
  */
 void MoveRight(Camera *camera, float speed);
+
 
 #endif // CAMERA_H_INCLUDED

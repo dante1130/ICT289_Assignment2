@@ -14,7 +14,7 @@ void ResetCamera(Camera *camera)
 {
     camera->eye.x = 0;
     camera->eye.y = 0;
-    camera->eye.z = 5;
+    camera->eye.z = 0;
 
     camera->center.x = 0;
     camera->center.y = 0;
@@ -23,6 +23,9 @@ void ResetCamera(Camera *camera)
     camera->up.x = 0;
     camera->up.y = 1;
     camera->up.z = 0;
+
+    camera->yaw = 0;
+    camera->pitch = 0;
 
     camera->angle = 0;
 }
@@ -53,18 +56,4 @@ void MoveRight(Camera *camera, float speed)
 
     camera->eye.x += crossProduct.x * speed;
     camera->eye.z += crossProduct.z * speed;
-}
-
-void LookLeft(Camera *camera)
-{
-    camera->angle -= 0.05f;
-    camera->center.x = sin(camera->angle);
-    camera->center.z = -cos(camera->angle);
-}
-
-void LookRight(Camera *camera)
-{
-    camera->angle += 0.05f;
-    camera->center.x = sin(camera->angle);
-    camera->center.z = -cos(camera->angle);
 }

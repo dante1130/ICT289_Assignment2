@@ -17,6 +17,8 @@ typedef struct Camera
     Vector3 center;
     Vector3 up;
 
+    float yaw, pitch;
+
     float angle;
 } Camera;
 
@@ -83,20 +85,5 @@ void MoveLeft(Camera *camera, float speed);
  */
 void MoveRight(Camera *camera, float speed);
 
-/** \brief Moves the perspective of the camera left
- *
- * \param Camera *
- * \return void
- *
- */
-void LookLeft(Camera *camera);
-
-/** \brief Moves the perspective of the camera right
- *
- * \param Camera *
- * \return void
- *
- */
-void LookRight(Camera *camera);
 
 #endif // CAMERA_H_INCLUDED

@@ -1,20 +1,27 @@
 #include <GL/freeglut.h>
 #include <stdbool.h>
 #include "Camera.h"
+#include "OffLoader.h"
+#include "Object3D.h"
 
 #define M_PI 3.14159265358979323846
 
+// Define window size
 const int windowWidth = 1920;
 const int windowHeight = 1080;
 
+// Used for keyboard movement
 const float cameraSpeed = 0.1;
 
+// Used for mouse movement
 bool firstMouse = 1;
 
 float prevX;
 float prevY;
 
+// Declaration of objects
 Camera camera;
+Object3D gun;
 
 void init()
 {
@@ -22,7 +29,6 @@ void init()
     glClearColor(0.0, 0.0, 0.0, 0.0); // black background
     glColor3f(0.0, 0.0, 1.0); // draw with color
     glLineWidth(1.0);
-
 
     glMatrixMode(GL_PROJECTION); // switch matrix mode to projection
     glLoadIdentity(); // Load an identity matrix as the projection matrix
@@ -33,6 +39,9 @@ void init()
     GLdouble nearVal = 0.1;
     GLdouble farVal = 1000;
     gluPerspective(fov, aspect, nearVal, farVal);
+
+    // Read 3D objects via off files
+    gun = readOFFFile("Objects/gun2.off");
 
     //Initialize camera
     camera = CreateCamera();
@@ -51,7 +60,9 @@ void display()
 
 
     // Sample object to test
-    glutWireTeapot(1.0);
+    //glutWireTeapot(1.0);
+
+    drawObject3D(gun);
 
     glutSwapBuffers(); // swap buffer
 }
@@ -132,7 +143,7 @@ void mouseMove(int x, int y)
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv); // Initialization of GLUT
-    glutInitWindowSize(windowWidth, windowHeight); // 1280 x 720 pixels window
+    glutInitWindowSize(windowWidth, windowHeight); // 1920 x 1080 pixels window
     glutInitWindowPosition(0, 0); // place at top left of the window display
     glutCreateWindow("Shooting range"); // Names the window title
     glutSetCursor(GLUT_CURSOR_NONE); // Removes the cursor
@@ -144,9 +155,12 @@ int main(int argc, char **argv)
     glutDisplayFunc(display); // callback that is invoked when window is displayed
     glutKeyboardFunc(keys); // interaction with keyboard keys
     glutPassiveMotionFunc(mouseMove); // interaction with moving the mouse
-    glutMotionFunc(mouseMove); // interaction with moving the mouse (onclicked)
+    glutMotionFunc(mouseMove); // interaction with moving the mouse (onClicked)
 
     glutMainLoop(); // enter event loop
+
+    // Free objects from memory
+    freeObject3D(gun);
 
     return 0;
 }

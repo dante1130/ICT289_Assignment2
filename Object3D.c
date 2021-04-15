@@ -6,9 +6,12 @@ void drawObject3D(Object3D obj3D)
     for (int i = 0; i < obj3D.nfaces; ++i)
     {
         glBegin(GL_POLYGON);
-            glVertex3f(obj3D.vertices[obj3D.faces[i].points[0]].x, obj3D.vertices[obj3D.faces[i].points[0]].y, obj3D.vertices[obj3D.faces[i].points[0]].z);
-            glVertex3f(obj3D.vertices[obj3D.faces[i].points[1]].x, obj3D.vertices[obj3D.faces[i].points[1]].y, obj3D.vertices[obj3D.faces[i].points[1]].z);
-            glVertex3f(obj3D.vertices[obj3D.faces[i].points[2]].x, obj3D.vertices[obj3D.faces[i].points[2]].y, obj3D.vertices[obj3D.faces[i].points[2]].z);
+            for (int j = 0; j < obj3D.faces[i].numPoints; ++j)
+            {
+                glVertex3f(obj3D.vertices[obj3D.faces[i].points[j]].x,
+                           obj3D.vertices[obj3D.faces[i].points[j]].y,
+                           obj3D.vertices[obj3D.faces[i].points[j]].z);
+            }
         glEnd();
     }
 }

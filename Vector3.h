@@ -1,6 +1,8 @@
 #ifndef VERTEX3_H_INCLUDED
 #define VERTEX3_H_INCLUDED
 
+#include <math.h>
+
 /** \struct Vector3
  *
  * Represents a displacement in a 3D space.
@@ -27,7 +29,7 @@ Vector3 Add(Vector3 vector1, Vector3 vector2);
  * \return Vector3
  *
  */
-Vector3 Substract(Vector3 vector1, Vector3 vector2);
+Vector3 Subtract(Vector3 vector1, Vector3 vector2);
 
 /** \brief Multiply the values of a vector by a scalar.
  *

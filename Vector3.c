@@ -11,7 +11,7 @@ Vector3 Add(Vector3 vector1, Vector3 vector2)
     return vector;
 }
 
-Vector3 Substract(Vector3 vector1, Vector3 vector2)
+Vector3 Subtract(Vector3 vector1, Vector3 vector2)
 {
     Vector3 vector;
 

@@ -1,21 +1,22 @@
 # depslib dependency file v1.0
-1618323278 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1618657056 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
 	<stdbool.h>
 	"Camera.h"
 	"OffLoader.h"
 	"Object3D.h"
 
-1616481493 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
+1618657529 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
 	"Vector3.h"
 
-1616665825 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+1618657587 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+	<math.h>
 
-1618323155 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+1618657404 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
 	<stdio.h>
 	"Object3D.h"
 
-1616481539 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+1618657355 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
 	<stdlib.h>
 	<math.h>
 	<GL/freeglut.h>
@@ -28,9 +29,44 @@
 	<stdio.h>
 	"Object3D.h"
 
-1616735179 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+1618657132 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
 	"Camera.h"
 
 1616735175 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
+	"Vector3.h"
+
+1616735179 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+	"Camera.h"
+
+1616735175 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
+	"Vector3.h"
+
+1616665825 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+
+1618323155 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+	<stdio.h>
+	"Object3D.h"
+
+1616481539 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+	<stdlib.h>
+	<math.h>
+	<GL/freeglut.h>
+	"Vector3.h"
+
+1616480495 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.c
+	"OffLoader.h"
+
+1616481518 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.h
+	<stdio.h>
+	"Object3D.h"
+
+1616481493 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
+	"Vector3.h"
+
+1617260101 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.c
+	"BoundingSphere.h"
+
+1617259860 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.h
+	<stdbool.h>
 	"Vector3.h"
 

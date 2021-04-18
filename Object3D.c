@@ -1,6 +1,42 @@
 #include <stdio.h>
 #include "Object3D.h"
 
+Vector3 GetCenterOfMass(Object3D obj3D)
+{
+    Vector3 sum;
+
+    sum.x = 0;
+    sum.y = 0;
+    sum.z = 0;
+
+    for (int i = 0; i < obj3D.nvert; ++i)
+    {
+        sum = Add(sum, obj3D.vertices[i]);
+    }
+
+    return Divide(sum, obj3D.nvert);
+}
+
+float GetBoundingSphereRadius(Object3D obj3D)
+{
+    Vector3 centerOfMass = GetCenterOfMass(obj3D);
+
+    float magnitude;
+    float radius = 0;
+
+    for (int i = 0; i < obj3D.nvert; ++i)
+    {
+        magnitude = Magnitude(Subtract(obj3D.vertices[i], centerOfMass));
+
+        if (radius < magnitude)
+        {
+            radius = magnitude;
+        }
+    }
+
+    return radius;
+}
+
 void drawObject3D(Object3D obj3D)
 {
     for (int i = 0; i < obj3D.nfaces; ++i)

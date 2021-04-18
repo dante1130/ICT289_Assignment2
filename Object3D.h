@@ -20,6 +20,10 @@ typedef struct Object3D
     Faces *faces;
 } Object3D;
 
+Vector3 GetCenterOfMass(Object3D obj3D);
+
+float GetBoundingSphereRadius(Object3D obj3D);
+
 void drawObject3D(Object3D obj3D);
 
 void freeObject3D(Object3D obj3D);

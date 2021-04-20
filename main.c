@@ -2,9 +2,7 @@
 #include <stdbool.h>
 #include "Camera.h"
 #include "OffLoader.h"
-#include "Object3D.h"
-#include "BoundingSphere.h"
-#include "BoundingBox.h"
+#include "GameObject.h"
 
 #define M_PI 3.14159265358979323846
 
@@ -23,10 +21,7 @@ float prevY;
 
 // Declaration of objects
 Camera camera;
-Object3D gun;
-Object3D bottle;
-
-BoundingBox bBox;
+GameObject bottle;
 
 void init()
 {
@@ -36,7 +31,7 @@ void init()
     glLineWidth(1.0);
 
     glMatrixMode(GL_PROJECTION); // switch matrix mode to projection
-    glLoadIdentity(); // Load an identity matrix as the projection matrix
+    glLoadIdentity();
 
     //Viewing volume
     GLdouble fov = 60;
@@ -46,13 +41,13 @@ void init()
     gluPerspective(fov, aspect, nearVal, farVal);
 
     // Read 3D objects via off files
-    gun = readOFFFile("Objects/gun2.off");
-    bottle = readOFFFile("Objects/bottle.off");
+    bottle.obj3D = readOFFFile("Objects/bottle.off");
+    normalizeObject3D(&bottle.obj3D);
 
-    GetBoundingBoxExtents(bottle, &bBox.minExtent, &bBox.maxExtent);
+    getBoundingBoxExtents(bottle.obj3D, &bottle.bBox.minExtent, &bottle.bBox.maxExtent);
 
     //Initialize camera
-    camera = CreateCamera();
+    ResetCamera(&camera);
 }
 
 void display()
@@ -68,11 +63,11 @@ void display()
 
     // Sample object to test
     glColor3f(0.0, 0.0, 1.0);
-    drawObject3D(bottle);
+    drawObject3D(bottle.obj3D);
 
     // test draw bounding box
     glColor3f(1.0, 0.0, 0.0);
-    drawBoundingBox(bBox);
+    drawBoundingBox(bottle.bBox);
 
     glutSwapBuffers(); // swap buffer
 }
@@ -170,8 +165,7 @@ int main(int argc, char **argv)
     glutMainLoop(); // enter event loop
 
     // Free objects from memory
-    freeObject3D(gun);
-    freeObject3D(bottle);
+    freeObject3D(bottle.obj3D);
 
     return 0;
 }

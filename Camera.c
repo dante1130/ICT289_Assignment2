@@ -1,15 +1,5 @@
 #include "Camera.h"
 
-Camera CreateCamera()
-{
-    Camera camera;
-
-    // Assign default values
-    ResetCamera(&camera);
-
-    return camera;
-}
-
 void ResetCamera(Camera *camera)
 {
     camera->eye.x = 0;
@@ -44,16 +34,16 @@ void MoveBackward(Camera *camera, float speed)
 
 void MoveLeft(Camera *camera, float speed)
 {
-    Vector3 crossProduct = CrossProduct(camera->center, camera->up);
+    Vector3 crossP = crossProduct(camera->center, camera->up);
 
-    camera->eye.x -= crossProduct.x * speed;
-    camera->eye.z -= crossProduct.z * speed;
+    camera->eye.x -= crossP.x * speed;
+    camera->eye.z -= crossP.z * speed;
 }
 
 void MoveRight(Camera *camera, float speed)
 {
-    Vector3 crossProduct = CrossProduct(camera->center, camera->up);
+    Vector3 crossP = crossProduct(camera->center, camera->up);
 
-    camera->eye.x += crossProduct.x * speed;
-    camera->eye.z += crossProduct.z * speed;
+    camera->eye.x += crossP.x * speed;
+    camera->eye.z += crossP.z * speed;
 }

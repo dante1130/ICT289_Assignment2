@@ -1,6 +1,6 @@
 #include "Vector3.h"
 
-Vector3 Add(Vector3 vector1, Vector3 vector2)
+Vector3 add(Vector3 vector1, Vector3 vector2)
 {
     Vector3 vector;
 
@@ -11,7 +11,7 @@ Vector3 Add(Vector3 vector1, Vector3 vector2)
     return vector;
 }
 
-Vector3 Subtract(Vector3 vector1, Vector3 vector2)
+Vector3 subtract(Vector3 vector1, Vector3 vector2)
 {
     Vector3 vector;
 
@@ -22,7 +22,7 @@ Vector3 Subtract(Vector3 vector1, Vector3 vector2)
     return vector;
 }
 
-Vector3 Multiply(Vector3 vector, int scalar)
+Vector3 multiply(Vector3 vector, int scalar)
 {
     vector.x *= scalar;
     vector.y *= scalar;
@@ -31,7 +31,7 @@ Vector3 Multiply(Vector3 vector, int scalar)
     return vector;
 }
 
-Vector3 Divide(Vector3 vector, int scalar)
+Vector3 divide(Vector3 vector, int scalar)
 {
     vector.x /= scalar;
     vector.y /= scalar;
@@ -40,28 +40,28 @@ Vector3 Divide(Vector3 vector, int scalar)
     return vector;
 }
 
-float Magnitude(Vector3 vector)
+float magnitude(Vector3 vector)
 {
     return (float) sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
-Vector3 Normalize(Vector3 vector)
+Vector3 normalize(Vector3 vector)
 {
-    float magnitude = Magnitude(vector);
+    float vectorMagnitude = magnitude(vector);
 
-    vector.x /= magnitude;
-    vector.y /= magnitude;
-    vector.z /= magnitude;
+    vector.x /= vectorMagnitude;
+    vector.y /= vectorMagnitude;
+    vector.z /= vectorMagnitude;
 
     return vector;
 }
 
-float DotProduct(Vector3 vector1, Vector3 vector2)
+float dotProduct(Vector3 vector1, Vector3 vector2)
 {
     return (vector1.x * vector2.x) + (vector1.y * vector2.y) + (vector1.z * vector2.z);
 }
 
-Vector3 CrossProduct(Vector3 vector1, Vector3 vector2)
+Vector3 crossProduct(Vector3 vector1, Vector3 vector2)
 {
     Vector3 vector;
 

@@ -20,11 +20,13 @@ typedef struct Object3D
     Faces *faces;
 } Object3D;
 
-Vector3 GetCenterOfMass(Object3D obj3D);
+void normalizeObject3D(Object3D *obj3D);
 
-float GetBoundingSphereRadius(Object3D obj3D);
+Vector3 getCenterOfMass(Object3D obj3D);
 
-void GetBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent);
+float getBoundingSphereRadius(Object3D obj3D);
+
+void getBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent);
 
 void drawObject3D(Object3D obj3D);
 

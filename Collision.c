@@ -1,4 +1,19 @@
-#include "BoundingBox.h"
+#include "Collision.h"
+
+bool isSphereCollide(BoundingSphere sphere1, BoundingSphere sphere2)
+{
+    float radiusDistance = sphere1.radius + sphere2.radius;
+    float centerDistance = magnitude(subtract(sphere2.center, sphere1.center));
+
+    return centerDistance <= radiusDistance;
+}
+
+bool isBoxCollide(BoundingBox box1, BoundingBox box2)
+{
+    return (box1.minExtent.x <= box2.maxExtent.x && box1.maxExtent.x >= box2.minExtent.x) &&
+           (box1.minExtent.y <= box2.maxExtent.y && box1.maxExtent.y >= box2.minExtent.y) &&
+           (box1.minExtent.z <= box2.maxExtent.z && box1.maxExtent.z >= box2.minExtent.z);
+}
 
 void drawBoundingBox(BoundingBox box)
 {
@@ -36,11 +51,4 @@ void drawBoundingBox(BoundingBox box)
         glVertex3f(box.minExtent.x, box.maxExtent.y, box.minExtent.z);
         glVertex3f(box.minExtent.x, box.maxExtent.y, box.maxExtent.z);
     glEnd();
-}
-
-bool isBoxCollide(BoundingBox box1, BoundingBox box2)
-{
-    return (box1.minExtent.x <= box2.maxExtent.x && box1.maxExtent.x >= box2.minExtent.x) &&
-           (box1.minExtent.y <= box2.maxExtent.y && box1.maxExtent.y >= box2.minExtent.y) &&
-           (box1.minExtent.z <= box2.maxExtent.z && box1.maxExtent.z >= box2.minExtent.z);
 }

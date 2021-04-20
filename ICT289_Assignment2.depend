@@ -1,24 +1,22 @@
 # depslib dependency file v1.0
-1618885621 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1618894759 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
 	<stdbool.h>
 	"Camera.h"
 	"OffLoader.h"
-	"Object3D.h"
-	"BoundingSphere.h"
-	"BoundingBox.h"
+	"GameObject.h"
 
-1618837577 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
+1618893723 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
 	"Vector3.h"
 
-1618657587 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+1618893665 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
 	<math.h>
 
-1618885710 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+1618894156 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
 	<stdio.h>
 	"Object3D.h"
 
-1618855587 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+1618893764 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
 	<stdlib.h>
 	<math.h>
 	<GL/freeglut.h>
@@ -31,10 +29,10 @@
 	<stdio.h>
 	"Object3D.h"
 
-1618657132 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+1618894349 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
 	"Camera.h"
 
-1616735175 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
+1618894357 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
 	"Vector3.h"
 
 1616735179 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
@@ -65,18 +63,29 @@
 1616481493 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
 	"Vector3.h"
 
-1618836644 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.c
+1618893664 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.c
 	"BoundingSphere.h"
 
-1617259860 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.h
-	<stdbool.h>
+1618895005 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.h
 	"Vector3.h"
 
 1618885689 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingbox.c
 	"BoundingBox.h"
 
-1618885678 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingbox.h
+1618894998 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingbox.h
+	"Vector3.h"
+
+1618894956 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.h
+	"Vector3.h"
+	"Object3D.h"
+	"Collision.h"
+
+1618894944 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.c
+	"Collision.h"
+
+1618895026 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.h
 	<gl/freeglut.h>
 	<stdbool.h>
-	"Vector3.h"
+	"BoundingBox.h"
+	"BoundingSphere.h"
 

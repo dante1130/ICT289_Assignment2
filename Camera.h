@@ -22,13 +22,6 @@ typedef struct Camera
     float angle;
 } Camera;
 
-/** \brief Creates a camera object.
- *
- * \return Camera object
- *
- */
-Camera CreateCamera();
-
 /** \brief Sets the camera to default values.
  *
  * \param Camera *

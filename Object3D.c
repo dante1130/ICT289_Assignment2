@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Object3D.h"
 
-Vector3 GetCenterOfMass(Object3D obj3D)
+Vector3 getCenterOfMass(Object3D obj3D)
 {
     Vector3 sum;
 
@@ -11,39 +11,34 @@ Vector3 GetCenterOfMass(Object3D obj3D)
 
     for (int i = 0; i < obj3D.nvert; ++i)
     {
-        sum = Add(sum, obj3D.vertices[i]);
+        sum = add(sum, obj3D.vertices[i]);
     }
 
-    return Divide(sum, obj3D.nvert);
+    return divide(sum, obj3D.nvert);
 }
 
-float GetBoundingSphereRadius(Object3D obj3D)
+float getBoundingSphereRadius(Object3D obj3D)
 {
-    Vector3 centerOfMass = GetCenterOfMass(obj3D);
+    Vector3 centerOfMass = getCenterOfMass(obj3D);
 
-    float magnitude;
+    float distance;
     float radius = 0;
 
     for (int i = 0; i < obj3D.nvert; ++i)
     {
-        magnitude = Magnitude(Subtract(obj3D.vertices[i], centerOfMass));
+        distance = magnitude(subtract(obj3D.vertices[i], centerOfMass));
 
-        if (radius < magnitude)
+        if (radius < distance)
         {
-            radius = magnitude;
+            radius = distance;
         }
     }
 
     return radius;
 }
 
-void GetBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent)
+void getBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent)
 {
-    Vector3 center = GetCenterOfMass(obj3D);
-    float magnitude = Magnitude(Subtract(obj3D.vertices[0], center));
-    float max = magnitude;
-    float min = magnitude;
-
     *minExtent = obj3D.vertices[0];
     *maxExtent = obj3D.vertices[0];
 
@@ -56,6 +51,18 @@ void GetBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExten
         maxExtent->x = (obj3D.vertices[i].x > maxExtent->x) ? obj3D.vertices[i].x : maxExtent->x;
         maxExtent->y = (obj3D.vertices[i].y > maxExtent->y) ? obj3D.vertices[i].y : maxExtent->y;
         maxExtent->z = (obj3D.vertices[i].z > maxExtent->z) ? obj3D.vertices[i].z : maxExtent->z;
+    }
+}
+
+void normalizeObject3D(Object3D *obj3D)
+{
+    Vector3 center = getCenterOfMass(*obj3D);
+    float radius = getBoundingSphereRadius(*obj3D);
+
+    for (int i = 0; i < obj3D->nvert; ++i)
+    {
+        obj3D->vertices[i] = subtract(obj3D->vertices[i], center);
+        obj3D->vertices[i] = divide(obj3D->vertices[i], radius);
     }
 }
 

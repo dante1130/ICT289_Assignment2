@@ -31,18 +31,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="BoundingBox.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="BoundingBox.h" />
-		<Unit filename="BoundingSphere.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="BoundingSphere.h" />
 		<Unit filename="Camera.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Camera.h" />
+		<Unit filename="Collision.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Collision.h" />
 		<Unit filename="GameObject.h" />
 		<Unit filename="Object3D.c">
 			<Option compilerVar="CC" />

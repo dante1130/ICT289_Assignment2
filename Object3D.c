@@ -81,6 +81,29 @@ void drawObject3D(Object3D obj3D)
     }
 }
 
+void drawWorld(Object3D world)
+{
+    for (int i = 0; i < world.nfaces; ++i)
+    {
+        glBegin(GL_POLYGON);
+            for (int j = 0; j < world.faces[i].numPoints; ++j)
+            {
+                if (world.vertices[world.faces[i].points[j]].y < 0)
+                {
+                    glColor3f(0.5, 0.5, 0.5);
+                }
+                else
+                {
+                    glColor3f(1.0, 1.0, 1.0);
+                }
+                glVertex3f(world.vertices[world.faces[i].points[j]].x,
+                           world.vertices[world.faces[i].points[j]].y,
+                           world.vertices[world.faces[i].points[j]].z);
+            }
+        glEnd();
+    }
+}
+
 void freeObject3D(Object3D obj3D)
 {
     for (int i = 0; i < obj3D.nfaces; ++i)

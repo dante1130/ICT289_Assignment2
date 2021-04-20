@@ -37,6 +37,28 @@ float GetBoundingSphereRadius(Object3D obj3D)
     return radius;
 }
 
+void GetBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent)
+{
+    Vector3 center = GetCenterOfMass(obj3D);
+    float magnitude = Magnitude(Subtract(obj3D.vertices[0], center));
+    float max = magnitude;
+    float min = magnitude;
+
+    *minExtent = obj3D.vertices[0];
+    *maxExtent = obj3D.vertices[0];
+
+    for (int i = 1; i < obj3D.nvert; ++i)
+    {
+        minExtent->x = (obj3D.vertices[i].x < minExtent->x) ? obj3D.vertices[i].x : minExtent->x;
+        minExtent->y = (obj3D.vertices[i].y < minExtent->y) ? obj3D.vertices[i].y : minExtent->y;
+        minExtent->z = (obj3D.vertices[i].z < minExtent->z) ? obj3D.vertices[i].z : minExtent->z;
+
+        maxExtent->x = (obj3D.vertices[i].x > maxExtent->x) ? obj3D.vertices[i].x : maxExtent->x;
+        maxExtent->y = (obj3D.vertices[i].y > maxExtent->y) ? obj3D.vertices[i].y : maxExtent->y;
+        maxExtent->z = (obj3D.vertices[i].z > maxExtent->z) ? obj3D.vertices[i].z : maxExtent->z;
+    }
+}
+
 void drawObject3D(Object3D obj3D)
 {
     for (int i = 0; i < obj3D.nfaces; ++i)

@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "OffLoader.h"
 #include "Object3D.h"
+#include "BoundingSphere.h"
+#include "BoundingBox.h"
 
 #define M_PI 3.14159265358979323846
 
@@ -22,6 +24,9 @@ float prevY;
 // Declaration of objects
 Camera camera;
 Object3D gun;
+Object3D bottle;
+
+BoundingBox bBox;
 
 void init()
 {
@@ -42,27 +47,32 @@ void init()
 
     // Read 3D objects via off files
     gun = readOFFFile("Objects/gun2.off");
+    bottle = readOFFFile("Objects/bottle.off");
+
+    GetBoundingBoxExtents(bottle, &bBox.minExtent, &bBox.maxExtent);
 
     //Initialize camera
     camera = CreateCamera();
-
-    glMatrixMode(GL_MODELVIEW); // switch matrix mode back to model view
 }
 
 void display()
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT); // clear the window to background color specified by glClearColor()
 
+    glMatrixMode(GL_MODELVIEW); // switch matrix mode back to model view
     glLoadIdentity();
+
     gluLookAt(camera.eye.x, camera.eye.y, camera.eye.z,
               camera.eye.x + camera.center.x, camera.center.y, camera.eye.z + camera.center.z,
               camera.up.x, camera.up.y, camera.up.z);
 
-
     // Sample object to test
-    //glutWireTeapot(1.0);
+    glColor3f(0.0, 0.0, 1.0);
+    drawObject3D(bottle);
 
-    drawObject3D(gun);
+    // test draw bounding box
+    glColor3f(1.0, 0.0, 0.0);
+    drawBoundingBox(bBox);
 
     glutSwapBuffers(); // swap buffer
 }
@@ -161,6 +171,7 @@ int main(int argc, char **argv)
 
     // Free objects from memory
     freeObject3D(gun);
+    freeObject3D(bottle);
 
     return 0;
 }

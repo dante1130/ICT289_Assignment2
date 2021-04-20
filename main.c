@@ -16,8 +16,8 @@ const float cameraSpeed = 0.1;
 // Used for mouse movement
 bool firstMouse = 1;
 
-float prevX;
-float prevY;
+float prevX = 0;
+float prevY = 0;
 
 // Declaration of objects
 Camera camera;
@@ -58,7 +58,7 @@ void display()
     glLoadIdentity();
 
     gluLookAt(camera.eye.x, camera.eye.y, camera.eye.z,
-              camera.eye.x + camera.center.x, camera.center.y, camera.eye.z + camera.center.z,
+              camera.eye.x + camera.center.x, camera.eye.y + camera.center.y, camera.eye.z + camera.center.z,
               camera.up.x, camera.up.y, camera.up.z);
 
     // Sample object to test
@@ -142,8 +142,11 @@ void mouseMove(int x, int y)
     camera.center.y = sin(degreesToRadians(camera.pitch));
     camera.center.z = -cos(degreesToRadians(camera.yaw)) * cos(degreesToRadians(camera.pitch));
 
+    camera.center = normalize(camera.center);
+
     glutPostRedisplay();
 }
+
 
 int main(int argc, char **argv)
 {

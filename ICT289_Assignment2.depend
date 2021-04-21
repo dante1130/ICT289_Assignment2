@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618897882 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1618908248 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
 	<stdbool.h>
 	"Camera.h"
@@ -12,11 +12,11 @@
 1618893665 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
 	<math.h>
 
-1618894156 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+1618904277 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
 	<stdio.h>
 	"Object3D.h"
 
-1618893764 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+1618902491 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
 	<stdlib.h>
 	<math.h>
 	<GL/freeglut.h>
@@ -80,10 +80,10 @@
 	"Object3D.h"
 	"Collision.h"
 
-1618894944 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.c
+1618910107 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.c
 	"Collision.h"
 
-1618895026 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.h
+1618906925 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.h
 	<gl/freeglut.h>
 	<stdbool.h>
 	"BoundingBox.h"

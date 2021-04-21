@@ -17,7 +17,8 @@ typedef struct GameObject
     Object3D obj3D;
     BoundingBox bBox;
     BoundingSphere bSphere;
-    // Physics object
+    Physics3D physics;
+
 } GameObject;
 
 #endif // GAMEOBJECT_H_INCLUDED

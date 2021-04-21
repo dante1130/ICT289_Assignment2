@@ -15,31 +15,6 @@ bool isBoxCollide(BoundingBox box1, BoundingBox box2)
            (box1.minExtent.z <= box2.maxExtent.z && box1.maxExtent.z >= box2.minExtent.z);
 }
 
-bool isBoxCollidePoint(BoundingBox box, Vector3 point)
-{
-    return (point.x >= box.minExtent.x && point.x <= box.maxExtent.x) &&
-           (point.y >= box.minExtent.y && point.y <= box.maxExtent.y) &&
-           (point.z >= box.minExtent.z && point.z <= box.maxExtent.z);
-}
-
-bool isBoxCollideSphere(BoundingBox box, BoundingSphere sphere)
-{
-    float distance;
-    Vector3 point;
-
-    point.x = (sphere.center.x < box.maxExtent.x) ? sphere.center.x : box.maxExtent.x;
-    point.y = (sphere.center.y < box.maxExtent.y) ? sphere.center.y : box.maxExtent.y;
-    point.z = (sphere.center.z < box.maxExtent.z) ? sphere.center.z : box.maxExtent.z;
-
-    point.x = (box.minExtent.x > point.x) ? box.minExtent.x : point.x;
-    point.y = (box.minExtent.y > point.y) ? box.minExtent.y : point.y;
-    point.z = (box.minExtent.z > point.z) ? box.minExtent.z : point.z;
-
-    distance = magnitude(subtract(point, sphere.center));
-
-    return distance <= sphere.radius;
-}
-
 void drawBoundingBox(BoundingBox box)
 {
     // Face 1

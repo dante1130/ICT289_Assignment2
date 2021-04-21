@@ -2,13 +2,15 @@
 #include <stdbool.h>
 #include "Camera.h"
 #include "OffLoader.h"
+#include "Physics3D.h"
 #include "GameObject.h"
 
 #define M_PI 3.14159265358979323846
+#define TIMERSEC 33
 
 // Define window size
-const int windowWidth = 1920;
-const int windowHeight = 1080;
+const int windowWidth = 500;
+const int windowHeight = 500;
 
 // Used for keyboard movement
 const float cameraSpeed = 0.1;
@@ -21,12 +23,11 @@ float prevY = 0;
 
 // Declaration of objects
 Camera camera;
+GameObject ballA;
+GameObject ballB;
 
-GameObject world;
-GameObject bottle;
-GameObject bench;
-GameObject vase;
-GameObject gun;
+// Turn on gravity
+bool activateGrav = 0;
 
 void init()
 {
@@ -34,13 +35,6 @@ void init()
     glClearColor(0.0, 0.0, 0.0, 0.0); // black background
     glColor3f(0.0, 0.0, 1.0); // draw with color
     glLineWidth(1.0);
-
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
 
     glMatrixMode(GL_PROJECTION); // switch matrix mode to projection
     glLoadIdentity();
@@ -52,23 +46,27 @@ void init()
     GLdouble farVal = 1000;
     gluPerspective(fov, aspect, nearVal, farVal);
 
-    //Initialize camera
-    ResetCamera(&camera);
-
     // Read 3D objects via off files
-    world.obj3D = readOFFFile("Objects/world.off");
-    bottle.obj3D = readOFFFile("Objects/bottle.off");
-    bench.obj3D = readOFFFile("Objects/bench.off");
-    vase.obj3D = readOFFFile("Objects/vase.off");
-    gun.obj3D = readOFFFile("Objects/gun2.off");
-
+    ballA.obj3D = readOFFFile("Objects/ball.off");
+    ballB.obj3D = readOFFFile("Objects/ball.off");
     //normalizeObject3D(&bottle.obj3D);
 
-    //Initialize collision
-    getBoundingBoxExtents(world.obj3D, &world.bBox.minExtent, &world.bBox.maxExtent);
-    getBoundingBoxExtents(bottle.obj3D, &bottle.bBox.minExtent, &bottle.bBox.maxExtent);
-    getBoundingBoxExtents(bench.obj3D, &bench.bBox.minExtent, &bench.bBox.maxExtent);
-    getBoundingBoxExtents(vase.obj3D, &vase.bBox.minExtent, &vase.bBox.maxExtent);
+    getBoundingBoxExtents(ballA.obj3D, &ballA.bBox.minExtent, &ballA.bBox.maxExtent);
+    getBoundingBoxExtents(ballB.obj3D, &ballB.bBox.minExtent, &ballB.bBox.maxExtent);
+
+    //Initialize camera
+    ResetCamera(&camera);
+}
+
+void drawGrass()
+{
+    glColor3f(0,1.0,0);
+    glBegin(GL_POLYGON);
+        glVertex3f(5,-1,5);
+        glVertex3f(5, -1,-5);
+        glVertex3f(-5,-1,-5);
+        glVertex3f(-5,-1,5);
+    glEnd();
 }
 
 void display()
@@ -82,32 +80,34 @@ void display()
               camera.eye.x + camera.center.x, camera.eye.y + camera.center.y, camera.eye.z + camera.center.z,
               camera.up.x, camera.up.y, camera.up.z);
 
-    // The world
-    drawWorld(world.obj3D);
+    drawGrass();
 
-    // Gun
-    glColor3f(0.6, 0.6, 0.6);
+    // Sample object to test
     glPushMatrix();
-    glTranslatef(camera.eye.x + camera.center.x, camera.eye.y + camera.center.y, camera.eye.z + camera.center.z);
-    glRotatef(90, 0, 1, 0);
-    drawObject3D(gun.obj3D);
-    glPopMatrix();
-
-    // Bottle
+    glTranslatef(ballA.physics.position.x, ballA.physics.position.y, ballA.physics.position.z);
     glColor3f(0.0, 0.0, 1.0);
-    drawObject3D(bottle.obj3D);
+    drawObject3D(ballA.obj3D);
+    glPopMatrix();
+    // test draw bounding box
+    glColor3f(1.0, 0.0, 0.0);
+    drawBoundingBox(ballA.bBox);
+
+    glTranslatef(2,0,0);
+    glTranslatef(ballB.physics.position.x, ballB.physics.position.y, ballB.physics.position.z);
+    glColor3f(0.0, 1.0, 1.0);
+    drawObject3D(ballB.obj3D);
 
     // test draw bounding box
     glColor3f(1.0, 0.0, 0.0);
-    drawBoundingBox(bottle.bBox);
+    drawBoundingBox(ballB.bBox);
+
+
 
     glutSwapBuffers(); // swap buffer
 }
 
 void keys(unsigned char key, int x, int y)
 {
-    Vector3 prevPos = camera.eye;
-
     switch (key)
     {
     case 'w':
@@ -126,14 +126,17 @@ void keys(unsigned char key, int x, int y)
         MoveRight(&camera, cameraSpeed);
         break;
 
+    case 'g':
+        activateGrav = 1;
+        printf("grva = %d", activateGrav);
+        break;
+    case 'v':
+        printf("Ball a x velocity: %f", ballA.physics.velocity.x);
+        break;
+
     case 27: // ESC key
         exit(0);
         break;
-    }
-
-    if (!(isBoxCollidePoint(world.bBox, camera.eye)))
-    {
-        camera.eye = prevPos;
     }
 
     // Redisplay the window content
@@ -171,7 +174,8 @@ void mouseMove(int x, int y)
     {
         camera.pitch = 89.0f;
     }
-    else if (camera.pitch < -89.0f)
+
+    if (camera.pitch < -89.0f)
     {
         camera.pitch = -89.0f;
     }
@@ -185,6 +189,34 @@ void mouseMove(int x, int y)
     glutPostRedisplay();
 }
 
+void animate()
+{
+    glutTimerFunc(TIMERSEC, animate, 0);
+    if (activateGrav == 1){
+        //Apply gravity for ball A
+        CalcGravity(&ballA.physics, TIMERSEC);
+        //Apply changes in position
+        ChangePosition(&ballA.physics);
+        //Bounce off floor
+        if(ballA.physics.position.y < -1) {
+                    invertVelocityY(&ballA.physics);
+                    ballA.physics.velocity.x = ballA.physics.velocity.x * 0.9;
+                    ballA.physics.velocity.z = ballA.physics.velocity.z * 0.9;
+        }
+
+        //Apply gravity for ball B
+        CalcGravity(&ballB.physics, TIMERSEC);
+        //Apply changes in position
+        ChangePosition(&ballB.physics);
+        //Bounce off floor
+        if(ballB.physics.position.y < -1){
+            invertVelocityY(&ballB.physics);
+        }
+
+    }
+    glutPostRedisplay();
+}
+
 
 int main(int argc, char **argv)
 {
@@ -193,8 +225,11 @@ int main(int argc, char **argv)
     glutInitWindowPosition(0, 0); // place at top left of the window display
     glutCreateWindow("Shooting range"); // Names the window title
     glutSetCursor(GLUT_CURSOR_NONE); // Removes the cursor
-    glutFullScreen(); // Turns window to fullscreen
-
+    //glutFullScreen(); // Turns window to fullscreen
+    SetPhysics(&ballA.physics, 1);
+    ballA.physics.velocity.x = 0.00001;
+    SetPhysics(&ballB.physics, 1);
+    ballB.physics.velocity.x = -0.00001;
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     init(); // initialize attributes
@@ -203,14 +238,12 @@ int main(int argc, char **argv)
     glutPassiveMotionFunc(mouseMove); // interaction with moving the mouse
     glutMotionFunc(mouseMove); // interaction with moving the mouse (onClicked)
 
+    glutIdleFunc(animate);
     glutMainLoop(); // enter event loop
 
     // Free objects from memory
-    freeObject3D(world.obj3D);
-    freeObject3D(bottle.obj3D);
-    freeObject3D(bench.obj3D);
-    freeObject3D(vase.obj3D);
-    freeObject3D(gun.obj3D);
+    freeObject3D(ballA.obj3D);
+    freeObject3D(ballB.obj3D);
 
     return 0;
 }

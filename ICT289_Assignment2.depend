@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618908248 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1618897882 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
 	<stdbool.h>
 	"Camera.h"
@@ -12,11 +12,11 @@
 1618893665 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
 	<math.h>
 
-1618904277 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+1618894156 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
 	<stdio.h>
 	"Object3D.h"
 
-1618902491 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+1618893764 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
 	<stdlib.h>
 	<math.h>
 	<GL/freeglut.h>
@@ -80,12 +80,62 @@
 	"Object3D.h"
 	"Collision.h"
 
-1618910107 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.c
+1618894944 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.c
 	"Collision.h"
 
-1618906925 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.h
+1618895026 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.h
 	<gl/freeglut.h>
 	<stdbool.h>
 	"BoundingBox.h"
 	"BoundingSphere.h"
+
+1618898565 source:c:\second year\ict289\test\ict289_assignment2-test\camera.c
+	"Camera.h"
+
+1618898565 c:\second year\ict289\test\ict289_assignment2-test\camera.h
+	"Vector3.h"
+
+1618898565 c:\second year\ict289\test\ict289_assignment2-test\vector3.h
+	<math.h>
+
+1618898565 source:c:\second year\ict289\test\ict289_assignment2-test\collision.c
+	"Collision.h"
+
+1618898565 c:\second year\ict289\test\ict289_assignment2-test\collision.h
+	<gl/freeglut.h>
+	<stdbool.h>
+	"BoundingBox.h"
+	"BoundingSphere.h"
+
+1618898565 c:\second year\ict289\test\ict289_assignment2-test\boundingbox.h
+	"Vector3.h"
+
+1618898565 c:\second year\ict289\test\ict289_assignment2-test\boundingsphere.h
+	"Vector3.h"
+
+1618902595 source:c:\second year\ict289\test\ict289_assignment2-test\object3d.c
+	<stdio.h>
+	"Object3D.h"
+
+1618910603 c:\second year\ict289\test\ict289_assignment2-test\object3d.h
+	<stdlib.h>
+	<math.h>
+	<GL/freeglut.h>
+	"Vector3.h"
+
+1618973146 c:\second year\ict289\test\ict289_assignment2-test\physics3d.h
+	"Vector3.h"
+
+1618898565 source:c:\second year\ict289\test\ict289_assignment2-test\offloader.c
+	"OffLoader.h"
+
+1618898565 c:\second year\ict289\test\ict289_assignment2-test\offloader.h
+	<stdio.h>
+	"Object3D.h"
+
+1618975915 source:c:\second year\ict289\test\ict289_assignment2-test\physics3d.c
+	"Physics3D.h"
+
+1618898565 source:c:\second year\ict289\test\ict289_assignment2-test\vector3.c
+	"Vector3.h"
 

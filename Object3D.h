@@ -30,8 +30,6 @@ void getBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExten
 
 void drawObject3D(Object3D obj3D);
 
-void drawWorld(Object3D world);
-
 void freeObject3D(Object3D obj3D);
 
 

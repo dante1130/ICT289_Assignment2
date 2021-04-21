@@ -50,6 +50,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="OffLoader.h" />
+		<Unit filename="Physics3D.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Physics3D.h" />
 		<Unit filename="Vector3.c">
 			<Option compilerVar="CC" />
 		</Unit>

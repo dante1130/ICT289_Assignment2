@@ -26,6 +26,8 @@ Vector3 getCenterOfMass(Object3D obj3D);
 
 float getBoundingSphereRadius(Object3D obj3D);
 
+void getBoundingSphere(Object3D obj3D, Vector3 *center, float *radius);
+
 void getBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent);
 
 void drawObject3D(Object3D obj3D);

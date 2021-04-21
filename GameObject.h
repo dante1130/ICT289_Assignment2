@@ -4,6 +4,7 @@
 #include "Vector3.h"
 #include "Object3D.h"
 #include "Collision.h"
+#include "Physics3D.h"
 
 /** \struct GameObject
  *
@@ -17,7 +18,11 @@ typedef struct GameObject
     Object3D obj3D;
     BoundingBox bBox;
     BoundingSphere bSphere;
-    // Physics object
+    Physics3D physics;
+
 } GameObject;
+
+void updateGameObj(GameObject * gameObject, float time);
+void translateGameObj(GameObject * gameObject, float x, float y, float z);
 
 #endif // GAMEOBJECT_H_INCLUDED

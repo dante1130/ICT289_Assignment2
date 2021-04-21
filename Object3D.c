@@ -37,6 +37,25 @@ float getBoundingSphereRadius(Object3D obj3D)
     return radius;
 }
 
+void getBoundingSphere(Object3D obj3D, Vector3 *center, float *radius)
+{
+    *center = getCenterOfMass(obj3D);
+
+    float distance;
+
+    for (int i = 0; i < obj3D.nvert; ++i)
+    {
+        distance = magnitude(subtract(obj3D.vertices[i], *center));
+
+        if (*radius < distance)
+        {
+            *radius = distance;
+        }
+    }
+
+    return radius;
+}
+
 void getBoundingBoxExtents(Object3D obj3D, Vector3 *minExtent, Vector3 *maxExtent)
 {
     *minExtent = obj3D.vertices[0];

@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1619080911 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1619116719 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
 	<stdbool.h>
 	"Camera.h"
 	"OffLoader.h"
 	"GameObject.h"
+	"Player.h"
 
 1618893723 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
 	"Vector3.h"
@@ -16,13 +17,13 @@
 	<stdio.h>
 	"Object3D.h"
 
-1619027444 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+1619114579 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
 	<stdlib.h>
 	<math.h>
 	<GL/freeglut.h>
 	"Vector3.h"
 
-1616480495 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.c
+1619086061 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.c
 	"OffLoader.h"
 
 1616481518 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.h
@@ -75,7 +76,7 @@
 1618894998 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingbox.h
 	"Vector3.h"
 
-1619026789 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.h
+1619098718 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.h
 	"Vector3.h"
 	"Object3D.h"
 	"Collision.h"
@@ -93,9 +94,17 @@
 1619077285 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.h
 	"Vector3.h"
 
-1619081153 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.c
+1619116801 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.c
 	"Physics3D.h"
 
-1619080411 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.c
+1619098722 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.c
 	"GameObject.h"
+
+1619110949 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\player.h
+	<gl/freeglut.h>
+	"Camera.h"
+	"GameObject.h"
+
+1619114972 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\player.c
+	"Player.h"
 

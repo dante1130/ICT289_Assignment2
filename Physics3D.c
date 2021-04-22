@@ -1,4 +1,3 @@
-
 #include "Physics3D.h"
 
 void SetPhysics(Physics3D *p, float mass)
@@ -16,14 +15,13 @@ void SetPhysics(Physics3D *p, float mass)
     p->position.z = 0;
 
     p->gravity = -0.009807;
-    p->elasticity = -0.9;
+    p->elasticity = -0.5;
     p->mass = mass;
 }
 
 void CalcGravity(Physics3D *p, float time)
 {
     p->velocity.y += p->gravity * time;
-    printf("%f\n", p->velocity.y);
 }
 
 void invertVelocityY(Physics3D *p)
@@ -34,7 +32,6 @@ void invertVelocityY(Physics3D *p)
 void ChangePosition(Physics3D *p)
 {
     p->position = add(p->position, p->velocity);
-
 }
 
 void NewProjection(Physics3D *obj1, Physics3D *obj2)

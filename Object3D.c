@@ -107,7 +107,7 @@ void drawWorld(Object3D world)
         glBegin(GL_POLYGON);
             for (int j = 0; j < world.faces[i].numPoints; ++j)
             {
-                if (world.vertices[world.faces[i].points[j]].y < 0)
+                if (world.vertices[world.faces[i].points[j]].y == 0)
                 {
                     glColor3f(0.5, 0.5, 0.5);
                 }

@@ -14,7 +14,7 @@ typedef struct Physics{
 
 }Physics3D;
 
-void SetPhysics(Physics3D *p, float x);
+void SetPhysics(Physics3D *p, float mass);
 
 void CalcGravity(Physics3D *p, float time);
 

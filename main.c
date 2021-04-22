@@ -5,7 +5,11 @@
 #include "GameObject.h"
 
 #define M_PI 3.14159265358979323846
-#define TIMERSEC 33
+
+const float TIMERSEC = 33;
+
+float elapsedTime = 0;
+float delta = 0;
 
 // Define window size
 const int windowWidth = 1280;
@@ -42,10 +46,12 @@ void init()
     glColor3f(0.0, 0.0, 1.0); // draw with color
     glLineWidth(1.0);
 
+    // Enable face culling
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
+    // Enable depth
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
@@ -82,12 +88,15 @@ void init()
     getBoundingSphere(ballB.obj3D, &ballB.bSphere.center, &ballB.bSphere.radius);
 
     SetPhysics(&ballA.physics, 1);
-    ballA.physics.velocity.x = 0.00001;
+    ballA.physics.velocity.x = 0.01;
     SetPhysics(&ballB.physics, 1);
-    ballB.physics.velocity.x = -0.00001;
+    ballB.physics.velocity.x = -0.01;
+
+    SetPhysics(&world.physics, 100000);
 
     // Translate objects
-    translateGameObj(&ballB, 2, 0, 0);
+    translateGameObj(&ballA, -1, 1, 0);
+    translateGameObj(&ballB, 1, 1, 0);
 }
 
 void display()
@@ -114,15 +123,14 @@ void display()
     drawObject3D(ballB.obj3D);
     glPopMatrix();
 
-
-
     /*
     // The world
     glPushMatrix();
-    glTranslatef(0, 0, 0);
+    glTranslatef(world.physics.position.x, world.physics.position.y, world.physics.position.z);
     drawWorld(world.obj3D);
     glPopMatrix();
 
+    /*
     // Gun
     glColor3f(0.6, 0.6, 0.6);
     glPushMatrix();
@@ -234,6 +242,10 @@ void animate()
 {
     glutTimerFunc(TIMERSEC, animate, 0);
 
+    float newElapsedTime = glutGet(GLUT_ELAPSED_TIME);
+    delta = (newElapsedTime - elapsedTime) / TIMERSEC;
+    elapsedTime = newElapsedTime;
+
     if (activateGrav == 1)
     {
         updateGameObj(&ballA, TIMERSEC);
@@ -245,15 +257,16 @@ void animate()
         }
 
         //Bounce off floor
-        if(ballA.physics.position.y < -1)
+        if(ballA.physics.position.y < 0.1)
         {
             invertVelocityY(&ballA.physics);
+
             ballA.physics.velocity.x = ballA.physics.velocity.x * 1;
             ballA.physics.velocity.z = ballA.physics.velocity.z * 1;
         }
 
         //Bounce off floor
-        if(ballB.physics.position.y < -1)
+        if(ballB.physics.position.y < 0.1)
         {
             invertVelocityY(&ballB.physics);
             ballB.physics.velocity.x = ballB.physics.velocity.x * 1;
@@ -280,7 +293,7 @@ int main(int argc, char **argv)
     glutPassiveMotionFunc(mouseMove); // interaction with moving the mouse
     glutMotionFunc(mouseMove); // interaction with moving the mouse (onClicked)
 
-    glutIdleFunc(animate);
+    glutTimerFunc(TIMERSEC, animate, 0);
     glutMainLoop(); // enter event loop
 
     // Free objects from memory

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1619027331 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+1619080911 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
 	<GL/freeglut.h>
 	<stdbool.h>
 	"Camera.h"
@@ -12,7 +12,7 @@
 1618893665 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
 	<math.h>
 
-1619027424 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+1619067358 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
 	<stdio.h>
 	"Object3D.h"
 
@@ -29,7 +29,7 @@
 	<stdio.h>
 	"Object3D.h"
 
-1618897915 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+1619068646 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
 	"Camera.h"
 
 1618894357 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
@@ -90,12 +90,12 @@
 	"BoundingBox.h"
 	"BoundingSphere.h"
 
-1618977794 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.h
+1619077285 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.h
 	"Vector3.h"
 
-1619026632 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.c
+1619081153 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.c
 	"Physics3D.h"
 
-1619026911 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.c
+1619080411 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.c
 	"GameObject.h"
 

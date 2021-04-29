@@ -14,6 +14,6 @@ typedef struct Player
 
 void playerInit(Player *player);
 void drawGun(Player *player);
-void shoot(Player *player);
+void shoot(Player *player, float time);
 
 #endif // PLAYER_H_INCLUDED

@@ -21,8 +21,8 @@ void drawGun(Player *player)
     glPopMatrix();
 }
 
-void shoot(Player *player)
+void shoot(Player *player, float time)
 {
     player->bullet.physics.position = player->camera.eye;
-    player->bullet.physics.velocity = player->camera.center;
+    player->bullet.physics.velocity = multiply(player->camera.center, time);
 }

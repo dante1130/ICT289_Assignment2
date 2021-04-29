@@ -18,7 +18,7 @@ void SetPhysics(Physics3D *p, float mass);
 
 void CalcGravity(Physics3D *p, float time);
 
-void ChangePosition(Physics3D *p);
+void ChangePosition(Physics3D *p, float time);
 
 void invertVelocityY(Physics3D *p);
 

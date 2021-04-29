@@ -234,7 +234,7 @@ void mouse(int button, int state, int x, int y)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        shoot(&player);
+        shoot(&player, 10);
     }
 }
 
@@ -243,7 +243,7 @@ void animate()
     glutTimerFunc(TIMERSEC, animate, 0);
 
     float newElapsedTime = glutGet(GLUT_ELAPSED_TIME);
-    delta = (newElapsedTime - elapsedTime) / TIMERSEC;
+    delta = (newElapsedTime - elapsedTime) / 1000;
     elapsedTime = newElapsedTime;
 
     updateGameObj(&player.bullet, delta);

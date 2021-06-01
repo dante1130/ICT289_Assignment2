@@ -18,7 +18,10 @@ typedef struct Object3D
     int nfaces;
     Vector3 *vertices;
     Faces *faces;
+    GLfloat color[3];
 } Object3D;
+
+void setColor(Object3D * obj3D, float red, float green, float blue);
 
 void normalizeObject3D(Object3D *obj3D);
 
@@ -34,7 +37,7 @@ void drawObject3D(Object3D obj3D);
 
 void drawWorld(Object3D world);
 
-void freeObject3D(Object3D obj3D);
+void freeObject3D(Object3D *obj3D);
 
 
 #endif // DATASTRUCTURES_H_INCLUDED

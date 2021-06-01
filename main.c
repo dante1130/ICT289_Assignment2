@@ -4,6 +4,7 @@
 #include "OffLoader.h"
 #include "GameObject.h"
 #include "Player.h"
+#include "VectorGameObject.h"
 
 #define M_PI 3.14159265358979323846
 
@@ -25,6 +26,9 @@ bool firstMouse = 1;
 float prevX = 0;
 float prevY = 0;
 
+// Used for lighting
+GLfloat light_position[] = { 0, 1, 0.1, 0.0 };
+
 // Declaration of objects
 Player player;
 
@@ -34,45 +38,25 @@ GameObject bench;
 GameObject vase;
 GameObject gun;
 
-// Turn on gravity
-bool activateGrav = 0;
+VectorGameObject vectorObjects;
 
-void init()
+void objectsInit()
 {
-    // set attributes
-    glClearColor(0.0, 0.0, 0.0, 0.0); // black background
-    glColor3f(0.0, 0.0, 1.0); // draw with color
-    glLineWidth(1.0);
+    //Initialize player
+    playerInit(&player);
 
-    // Enable face culling
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
-    // Enable depth
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-
-    glMatrixMode(GL_PROJECTION); // switch matrix mode to projection
-    glLoadIdentity();
-
-    //Viewing volume
-    GLdouble fov = 60;
-    GLdouble aspect = windowWidth / (GLfloat) windowHeight;
-    GLdouble nearVal = 0.1;
-    GLdouble farVal = 1000;
-    gluPerspective(fov, aspect, nearVal, farVal);
-
-    // Read 3D objects via off files
+     // Read 3D objects via off files
+    player.weapon = readOFFFile("Objects/gun2.off");
     world.obj3D = readOFFFile("Objects/world.off");
     bottle.obj3D = readOFFFile("Objects/bottle.off");
     bench.obj3D = readOFFFile("Objects/bench.off");
     vase.obj3D = readOFFFile("Objects/vase.off");
-    player.weapon = readOFFFile("Objects/gun2.off");
-    player.bullet.obj3D = readOFFFile("Objects/ball.off");
 
-    //Initialize player
-    playerInit(&player);
+    // Set color
+    setColor(&world.obj3D, 1.0, 1.0, 1.0);
+    setColor(&bottle.obj3D, 0.0, 0.0, 1.0);
+    setColor(&bench.obj3D, 0.8, 0.65, 0.45);
+    setColor(&vase.obj3D, 0.0, 1.0, 0.0);
 
     // Initialize collision
     getBoundingBoxExtents(world.obj3D, &world.bBox.minExtent, &world.bBox.maxExtent);
@@ -90,6 +74,61 @@ void init()
     translateGameObj(&bench, 0, bench.bBox.maxExtent.y / 2, -9);
     translateGameObj(&bottle, 0, (bottle.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
     translateGameObj(&vase, 0.25, (vase.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
+
+    vectorInit(&vectorObjects);
+
+    vectorPush(&vectorObjects, &world);
+    vectorPush(&vectorObjects, &bottle);
+    vectorPush(&vectorObjects, &bench);
+    vectorPush(&vectorObjects, &vase);
+    // vectorPush(&vectorObjects, &gun);
+}
+
+void init()
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    // set attributes
+    glClearColor(0.0, 0.0, 0.0, 0.0); // black background
+    glColor3f(0.0, 0.0, 1.0); // draw with color
+    glLineWidth(1.0);
+
+    // Enable face culling
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+
+    // Enable depth
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
+    // Enable lighting
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+    // Initialise objects
+    objectsInit();
+}
+
+void reshape(int w, int h)
+{
+    glMatrixMode(GL_PROJECTION); // switch matrix mode to projection
+    glLoadIdentity();
+
+    glViewport(0, 0, w, h);
+
+    //Viewing volume
+    GLdouble fov = 60;
+    GLdouble aspect = w / (GLfloat) h;
+    GLdouble nearVal = 0.1;
+    GLdouble farVal = 1000;
+    gluPerspective(fov, aspect, nearVal, farVal);
+
+    elapsedTime = glutGet(GLUT_ELAPSED_TIME);
 }
 
 void display()
@@ -105,41 +144,10 @@ void display()
               player.camera.eye.z + player.camera.center.z,
               player.camera.up.x, player.camera.up.y, player.camera.up.z);
 
-    // The world
-    glPushMatrix();
-    glTranslatef(world.physics.position.x, world.physics.position.y, world.physics.position.z);
-    drawWorld(world.obj3D);
-    glPopMatrix();
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
-    // Gun
-    //drawGun(&player);
-
-    // Bottle
-    glColor3f(0.0, 0.0, 1.0);
-    glPushMatrix();
-    glTranslatef(bottle.physics.position.x, bottle.physics.position.y, bottle.physics.position.z);
-    drawObject3D(bottle.obj3D);
-    glPopMatrix();
-
-    // Bench
-    glColor3f(0.8, 0.65, 0.45);
-    glPushMatrix();
-    glTranslatef(bench.physics.position.x, bench.physics.position.y, bench.physics.position.z);
-    drawObject3D(bench.obj3D);
-    glPopMatrix();
-
-    // Vase
-    glColor3f(0.1, 0.1, 0.1);
-    glPushMatrix();
-    glTranslatef(vase.physics.position.x, vase.physics.position.y, vase.physics.position.z);
-    drawObject3D(vase.obj3D);
-    glPopMatrix();
-
-    glColor3f(1, 1, 1);
-    glPushMatrix();
-    glTranslatef(player.bullet.physics.position.x, player.bullet.physics.position.y, player.bullet.physics.position.z);
-    drawObject3D(player.bullet.obj3D);
-    glPopMatrix();
+    vectorDrawObj(&vectorObjects);
+    vectorDrawObj(&player.bullets);
 
     glutSwapBuffers(); // swap buffer
 }
@@ -166,20 +174,15 @@ void keys(unsigned char key, int x, int y)
         MoveRight(&player.camera, cameraSpeed);
         break;
 
-    case 'g':
-        activateGrav = 1;
-        printf("grva = %d", activateGrav);
-        break;
-
     case 27: // ESC key
         exit(0);
         break;
     }
 
-    if (!(isBoxCollidePoint(world.bBox, player.camera.eye)))
-    {
-        player.camera.eye = prevPos;
-    }
+//    if (!(isBoxCollidePoint(world.bBox, player.camera.eye)))
+//    {
+//        player.camera.eye = prevPos;
+//    }
 
     // Redisplay the window content
     glutPostRedisplay();
@@ -246,13 +249,18 @@ void animate()
     delta = (newElapsedTime - elapsedTime) / 1000;
     elapsedTime = newElapsedTime;
 
-    updateGameObj(&player.bullet, delta);
 
-    if (player.bullet.physics.position.y <= 0.1)
+    for (int i = 0; i < player.bullets.size; ++i)
     {
-        player.bullet.physics.position.y = 0.1;
-        invertVelocityY(&player.bullet.physics);
+        updateGameObj(&player.bullets.array[i], delta);
+
+        if (player.bullets.array[i].physics.position.y <= 0.1)
+        {
+            player.bullets.array[i].physics.position.y = 0.1;
+            invertVelocityY(&player.bullets.array[i].physics);
+        }
     }
+
 
     glutPostRedisplay();
 }
@@ -269,6 +277,7 @@ int main(int argc, char **argv)
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     init(); // initialize attributes
+    glutReshapeFunc(reshape);
     glutDisplayFunc(display); // callback that is invoked when window is displayed
     glutKeyboardFunc(keys); // interaction with keyboard keys
     glutMouseFunc(mouse);
@@ -279,12 +288,13 @@ int main(int argc, char **argv)
     glutMainLoop(); // enter event loop
 
     // Free objects from memory
-    freeObject3D(world.obj3D);
-    freeObject3D(bottle.obj3D);
-    freeObject3D(bench.obj3D);
-    freeObject3D(vase.obj3D);
-    freeObject3D(player.weapon);
-    freeObject3D(player.bullet.obj3D);
+    vectorDelete(&vectorObjects);
+    vectorDelete(&player.bullets);
+    freeObject3D(&player.weapon);
+    freeObject3D(&world.obj3D);
+    freeObject3D(&bottle.obj3D);
+    freeObject3D(&bench.obj3D);
+    freeObject3D(&vase.obj3D);
 
     return 0;
 }

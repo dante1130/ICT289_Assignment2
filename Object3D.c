@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "Object3D.h"
 
+void setColor(Object3D * obj3D, float red, float green, float blue)
+{
+    obj3D->color[0] = red;
+    obj3D->color[1] = green;
+    obj3D->color[2] = blue;
+}
+
 Vector3 getCenterOfMass(Object3D obj3D)
 {
     Vector3 sum;
@@ -87,11 +94,16 @@ void normalizeObject3D(Object3D *obj3D)
 
 void drawObject3D(Object3D obj3D)
 {
+    glColor3fv(obj3D.color);
     for (int i = 0; i < obj3D.nfaces; ++i)
     {
         glBegin(GL_POLYGON);
             for (int j = 0; j < obj3D.faces[i].numPoints; ++j)
             {
+                glNormal3f(obj3D.vertices[obj3D.faces[i].points[j]].x,
+                           obj3D.vertices[obj3D.faces[i].points[j]].y,
+                           obj3D.vertices[obj3D.faces[i].points[j]].z);
+
                 glVertex3f(obj3D.vertices[obj3D.faces[i].points[j]].x,
                            obj3D.vertices[obj3D.faces[i].points[j]].y,
                            obj3D.vertices[obj3D.faces[i].points[j]].z);
@@ -123,13 +135,13 @@ void drawWorld(Object3D world)
     }
 }
 
-void freeObject3D(Object3D obj3D)
+void freeObject3D(Object3D *obj3D)
 {
-    for (int i = 0; i < obj3D.nfaces; ++i)
+    for (int i = 0; i < obj3D->nfaces; ++i)
     {
-        free(obj3D.faces[i].points);
+        free(obj3D->faces[i].points);
     }
 
-    free(obj3D.faces);
-    free(obj3D.vertices);
+    free(obj3D->faces);
+    free(obj3D->vertices);
 }

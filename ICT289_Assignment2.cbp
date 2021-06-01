@@ -65,6 +65,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Vector3.h" />
+		<Unit filename="VectorGameObject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="VectorGameObject.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

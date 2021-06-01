@@ -5,13 +5,19 @@ void playerInit(Player *player)
     Vector3 center = getCenterOfMass(player->weapon);
 
     ResetCamera(&player->camera);
-    SetPhysics(&player->bullet.physics, 0.1);
-    getBoundingSphere(player->bullet.obj3D, &player->bullet.bSphere.center, &player->bullet.bSphere.radius);
+    vectorInit(&player->bullets);
+}
+
+void bulletInit(GameObject *bullet)
+{
+    bullet->obj3D = readOFFFile("Objects/ball.off");
+    SetPhysics(&bullet->physics, 0.1);
+    getBoundingSphere(bullet->obj3D, &bullet->bSphere.center, &bullet->bSphere.radius);
+    setColor(&bullet->obj3D, 0, 0, 1.0);
 }
 
 void drawGun(Player *player)
 {
-    glColor3f(0.6, 0.6, 0.6);
     glPushMatrix();
     glTranslatef(player->camera.eye.x + player->camera.center.x,
                  player->camera.eye.y + player->camera.center.y,
@@ -23,6 +29,12 @@ void drawGun(Player *player)
 
 void shoot(Player *player, float time)
 {
-    player->bullet.physics.position = player->camera.eye;
-    player->bullet.physics.velocity = multiply(player->camera.center, time);
+    GameObject bullet;
+
+    bulletInit(&bullet);
+
+    bullet.physics.position = player->camera.eye;
+    bullet.physics.velocity = multiply(player->camera.center, time);
+
+    vectorPush(&player->bullets, &bullet);
 }

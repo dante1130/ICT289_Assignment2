@@ -20,6 +20,8 @@ const int windowHeight = 720;
 // Used for keyboard movement
 const float cameraSpeed = 0.1;
 
+bool gravity = 0;
+
 // Used for mouse movement
 bool firstMouse = 1;
 
@@ -46,7 +48,6 @@ void objectsInit()
     playerInit(&player);
 
      // Read 3D objects via off files
-    player.weapon = readOFFFile("Objects/gun2.off");
     world.obj3D = readOFFFile("Objects/world.off");
     bottle.obj3D = readOFFFile("Objects/bottle.off");
     bench.obj3D = readOFFFile("Objects/bench.off");
@@ -77,9 +78,8 @@ void objectsInit()
 
     vectorInit(&vectorObjects);
 
-    vectorPush(&vectorObjects, &world);
+
     vectorPush(&vectorObjects, &bottle);
-    vectorPush(&vectorObjects, &bench);
     vectorPush(&vectorObjects, &vase);
     // vectorPush(&vectorObjects, &gun);
 }
@@ -146,6 +146,13 @@ void display()
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
+    drawObject3D(world.obj3D);
+
+    glPushMatrix();
+    glTranslatef(bench.physics.position.x, bench.physics.position.y, bench.physics.position.z);
+    drawObject3D(bench.obj3D);
+    glPopMatrix();
+
     vectorDrawObj(&vectorObjects);
     vectorDrawObj(&player.bullets);
 
@@ -173,6 +180,11 @@ void keys(unsigned char key, int x, int y)
     case 'd':
         MoveRight(&player.camera, cameraSpeed);
         break;
+
+    case 'g':
+        gravity = 1;
+        break;
+
 
     case 27: // ESC key
         exit(0);
@@ -249,18 +261,38 @@ void animate()
     delta = (newElapsedTime - elapsedTime) / 1000;
     elapsedTime = newElapsedTime;
 
-
-    for (int i = 0; i < player.bullets.size; ++i)
+    if (gravity == 1)
     {
-        updateGameObj(&player.bullets.array[i], delta);
-
-        if (player.bullets.array[i].physics.position.y <= 0.1)
+        for (int i = 0; i < player.bullets.size; ++i)
         {
-            player.bullets.array[i].physics.position.y = 0.1;
-            invertVelocityY(&player.bullets.array[i].physics);
+            updateGameObj(&player.bullets.array[i], delta);
+
+            if (player.bullets.array[i].physics.position.y <= 0.1)
+            {
+                player.bullets.array[i].physics.position.y = 0.1;
+                invertVelocityY(&player.bullets.array[i].physics);
+            }
+
+            for (int j = 0; j < vectorObjects.size; ++j)
+            {
+                if (isBoxCollideSphere(vectorObjects.array[j].bBox, player.bullets.array[i].bSphere))
+                {
+                    NewProjection(&vectorObjects.array[j].physics, &player.bullets.array[i].physics);
+                }
+            }
+        }
+
+        for (int i = 0; i < vectorObjects.size; ++i)
+        {
+            updateGameObj(&vectorObjects.array[i], delta);
+
+            if (isBoxCollide(vectorObjects.array[i].bBox, bench.bBox))
+            {
+                vectorObjects.array[i].physics.accel.y = 0;
+                vectorObjects.array[i].physics.velocity.y = 0;
+            }
         }
     }
-
 
     glutPostRedisplay();
 }

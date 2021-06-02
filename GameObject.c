@@ -4,6 +4,7 @@ void updateGameObj(GameObject * gameObject, float time)
 {
     //Apply gravity
     CalcGravity(&gameObject->physics, time);
+
     //Apply changes in position
     ChangePosition(&gameObject->physics, time);
 

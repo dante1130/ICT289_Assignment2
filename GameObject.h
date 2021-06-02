@@ -22,7 +22,6 @@ typedef struct GameObject
 
 } GameObject;
 
-void initGameObj(GameObject * gameObject);
 void updateGameObj(GameObject * gameObject, float time);
 void translateGameObj(GameObject * gameObject, float x, float y, float z);
 

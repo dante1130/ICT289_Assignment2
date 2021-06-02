@@ -3,7 +3,7 @@
 void vectorInit(VectorGameObject *vector)
 {
     vector->size = 0;
-    vector->capacity = 6;
+    vector->capacity = 16;
     vector->array = (GameObject *) malloc(vector->capacity * sizeof(GameObject));
 }
 

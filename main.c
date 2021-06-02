@@ -68,8 +68,8 @@ void objectsInit()
     // Initialize physics
     SetPhysics(&world.physics, 100000);
     SetPhysics(&bottle.physics, 1);
-    SetPhysics(&bench.physics, 100);
-    SetPhysics(&vase.physics, 5);
+    SetPhysics(&bench.physics, 1);
+    SetPhysics(&vase.physics, 1);
 
     // Translate objects
     translateGameObj(&bench, 0, bench.bBox.maxExtent.y / 2, -9);
@@ -267,12 +267,6 @@ void animate()
         {
             updateGameObj(&player.bullets.array[i], delta);
 
-            if (player.bullets.array[i].physics.position.y <= 0.1)
-            {
-                player.bullets.array[i].physics.position.y = 0.1;
-                invertVelocityY(&player.bullets.array[i].physics);
-            }
-
             for (int j = 0; j < vectorObjects.size; ++j)
             {
                 if (isBoxCollideSphere(vectorObjects.array[j].bBox, player.bullets.array[i].bSphere))
@@ -280,17 +274,27 @@ void animate()
                     NewProjection(&vectorObjects.array[j].physics, &player.bullets.array[i].physics);
                 }
             }
+
+            if (player.bullets.array[i].physics.position.y <= 0.1)
+            {
+                player.bullets.array[i].physics.position.y = 0.1;
+                invertVelocityY(&player.bullets.array[i].physics);
+            }
         }
 
         for (int i = 0; i < vectorObjects.size; ++i)
         {
-            updateGameObj(&vectorObjects.array[i], delta);
-
             if (isBoxCollide(vectorObjects.array[i].bBox, bench.bBox))
             {
                 vectorObjects.array[i].physics.accel.y = 0;
                 vectorObjects.array[i].physics.velocity.y = 0;
             }
+            else
+            {
+                vectorObjects.array[i].physics.accel.y = vectorObjects.array[i].physics.gravity;
+            }
+
+            updateGameObj(&vectorObjects.array[i], delta);
         }
     }
 

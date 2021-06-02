@@ -11,7 +11,7 @@ void playerInit(Player *player)
 
 void bulletInit(GameObject *bullet)
 {
-    SetPhysics(&bullet->physics, 0.1);
+    SetPhysics(&bullet->physics, 1);
     getBoundingSphere(bullet->obj3D, &bullet->bSphere.center, &bullet->bSphere.radius);
     setColor(&bullet->obj3D, 0, 0, 1.0);
 }

@@ -69,6 +69,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="VectorGameObject.h" />
+		<Unit filename="Wall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Wall.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

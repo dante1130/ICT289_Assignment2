@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "VectorGameObject.h"
+#include "Wall.h"
 
 #define M_PI 3.14159265358979323846
 
@@ -34,7 +35,8 @@ GLfloat light_position[] = { 0, 1, 0.1, 0.0 };
 // Declaration of objects
 Player player;
 
-GameObject world;
+Wall world;
+
 GameObject bottle;
 GameObject bench;
 GameObject vase;
@@ -48,28 +50,26 @@ void objectsInit()
     playerInit(&player);
 
      // Read 3D objects via off files
-    world.obj3D = readOFFFile("Objects/world.off");
     bottle.obj3D = readOFFFile("Objects/bottle.off");
     bench.obj3D = readOFFFile("Objects/bench.off");
     vase.obj3D = readOFFFile("Objects/vase.off");
 
     // Set color
-    setColor(&world.obj3D, 1.0, 1.0, 1.0);
     setColor(&bottle.obj3D, 0.0, 0.0, 1.0);
     setColor(&bench.obj3D, 0.8, 0.65, 0.45);
     setColor(&vase.obj3D, 0.0, 1.0, 0.0);
 
     // Initialize collision
-    getBoundingBoxExtents(world.obj3D, &world.bBox.minExtent, &world.bBox.maxExtent);
+    readPlanes(&world);
+    resizePlanes(&world);
     getBoundingBoxExtents(bottle.obj3D, &bottle.bBox.minExtent, &bottle.bBox.maxExtent);
     getBoundingBoxExtents(bench.obj3D, &bench.bBox.minExtent, &bench.bBox.maxExtent);
     getBoundingBoxExtents(vase.obj3D, &vase.bBox.minExtent, &vase.bBox.maxExtent);
 
     // Initialize physics
-    SetPhysics(&world.physics, 100000);
     SetPhysics(&bottle.physics, 1);
-    SetPhysics(&bench.physics, 1);
-    SetPhysics(&vase.physics, 1);
+    SetPhysics(&bench.physics, 10);
+    SetPhysics(&vase.physics, 1.5);
 
     // Translate objects
     translateGameObj(&bench, 0, bench.bBox.maxExtent.y / 2, -9);
@@ -77,7 +77,6 @@ void objectsInit()
     translateGameObj(&vase, 0.25, (vase.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
 
     vectorInit(&vectorObjects);
-
 
     vectorPush(&vectorObjects, &bottle);
     vectorPush(&vectorObjects, &vase);
@@ -146,7 +145,8 @@ void display()
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
-    drawObject3D(world.obj3D);
+    glColor3f(1.0, 1.0, 1.0);
+    drawWalls();
 
     glPushMatrix();
     glTranslatef(bench.physics.position.x, bench.physics.position.y, bench.physics.position.z);
@@ -191,10 +191,13 @@ void keys(unsigned char key, int x, int y)
         break;
     }
 
-//    if (!(isBoxCollidePoint(world.bBox, player.camera.eye)))
-//    {
-//        player.camera.eye = prevPos;
-//    }
+    for (int i = 0; i < 10; ++i)
+    {
+        if (isBoxCollidePoint(world.bPlanes[i], player.camera.eye))
+        {
+            player.camera.eye = prevPos;
+        }
+    }
 
     // Redisplay the window content
     glutPostRedisplay();
@@ -219,14 +222,13 @@ void mouseMove(int x, int y)
     prevX = x;
     prevY = y;
 
-    float sensitivity = 1;
+    float sensitivity = 0.5;
     xOffset *= sensitivity;
     yOffset *= sensitivity;
 
     player.camera.yaw += xOffset;
     player.camera.pitch += yOffset;
 
-    //
     if(player.camera.pitch > 89.0f)
     {
         player.camera.pitch = 89.0f;
@@ -249,7 +251,7 @@ void mouse(int button, int state, int x, int y)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        shoot(&player, 10);
+        shoot(&player, 15);
     }
 }
 
@@ -275,19 +277,28 @@ void animate()
                 }
             }
 
+            if (isBoxCollideSphere(bench.bBox, player.bullets.array[i].bSphere))
+            {
+                //NewProjection(&player.bullets.array[i].physics, &bench.physics);
+                invertVelocityY(&player.bullets.array[i].physics);
+            }
+
+            // floor
             if (player.bullets.array[i].physics.position.y <= 0.1)
             {
                 player.bullets.array[i].physics.position.y = 0.1;
                 invertVelocityY(&player.bullets.array[i].physics);
+                GroundFriction(&player.bullets.array[i].physics);
             }
         }
 
         for (int i = 0; i < vectorObjects.size; ++i)
         {
-            if (isBoxCollide(vectorObjects.array[i].bBox, bench.bBox))
+            if (isBoxCollide(vectorObjects.array[i].bBox, bench.bBox) || vectorObjects.array[i].physics.position.y <= 0.1)
             {
                 vectorObjects.array[i].physics.accel.y = 0;
                 vectorObjects.array[i].physics.velocity.y = 0;
+                GroundFriction(&vectorObjects.array[i].physics);
             }
             else
             {
@@ -327,7 +338,6 @@ int main(int argc, char **argv)
     vectorDelete(&vectorObjects);
     vectorDelete(&player.bullets);
     freeObject3D(&player.weapon);
-    freeObject3D(&world.obj3D);
     freeObject3D(&bottle.obj3D);
     freeObject3D(&bench.obj3D);
     freeObject3D(&vase.obj3D);

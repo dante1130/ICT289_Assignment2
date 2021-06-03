@@ -13,7 +13,6 @@ void vectorPush(VectorGameObject *vector, const GameObject *gameObject)
     {
         vector->capacity *= 1.5;
         vector->array = (GameObject *) realloc(vector->array, vector->capacity);
-        printf("%d\n", vector->capacity);
     }
 
     vector->array[vector->size] = *gameObject;

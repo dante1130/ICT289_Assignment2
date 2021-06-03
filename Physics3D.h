@@ -20,6 +20,8 @@ void CalcGravity(Physics3D *p, float time);
 
 void ChangePosition(Physics3D *p, float time);
 
+void GroundFriction(Physics3D *p);
+
 void invertVelocityY(Physics3D *p);
 
 void NewProjection(Physics3D *obj1, Physics3D *obj2);

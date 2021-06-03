@@ -34,6 +34,35 @@ void ChangePosition(Physics3D *p, float time)
     p->position = add(p->position, multiply(p->velocity, time));
 }
 
+void GroundFriction(Physics3D *p)
+{
+    if (p->velocity.x > 0.1)
+    {
+        p->velocity.x -= 0.02;
+    }
+    else if (p->velocity.x < -0.1)
+    {
+        p->velocity.x += 0.02;
+    }
+    else
+    {
+        p->velocity.x = 0;
+    }
+
+    if (p->velocity.z > 0.1)
+    {
+        p->velocity.z -= 0.02;
+    }
+    else if (p->velocity.z < -0.1)
+    {
+        p->velocity.z += 0.02;
+    }
+    else
+    {
+        p->velocity.z = 0;
+    }
+}
+
 void NewProjection(Physics3D *obj1, Physics3D *obj2)
 {
     float massSum = obj1->mass + obj2->mass;

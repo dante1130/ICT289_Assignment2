@@ -41,6 +41,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Collision.h" />
+		<Unit filename="GameObject.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="GameObject.h" />
 		<Unit filename="Object3D.c">
 			<Option compilerVar="CC" />
@@ -50,10 +53,26 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="OffLoader.h" />
+		<Unit filename="Physics3D.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Physics3D.h" />
+		<Unit filename="Player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Player.h" />
 		<Unit filename="Vector3.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Vector3.h" />
+		<Unit filename="VectorGameObject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="VectorGameObject.h" />
+		<Unit filename="Wall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Wall.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

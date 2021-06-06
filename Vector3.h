@@ -38,7 +38,7 @@ Vector3 subtract(Vector3 vector1, Vector3 vector2);
  * \return Vector3
  *
  */
-Vector3 multiply(Vector3 vector, int scalar);
+Vector3 multiply(Vector3 vector, float scalar);
 
 /** \brief Divide the values of a vector by a scalar.
  *
@@ -47,7 +47,7 @@ Vector3 multiply(Vector3 vector, int scalar);
  * \return Vector3
  *
  */
-Vector3 divide(Vector3 vector, int scalar);
+Vector3 divide(Vector3 vector, float scalar);
 
 /** \brief Calculates the magnitude of a vector.
  *

@@ -4,7 +4,7 @@ void ResetCamera(Camera *camera)
 {
     camera->eye.x = 0;
     camera->eye.y = 1;
-    camera->eye.z = 0;
+    camera->eye.z = 2;
 
     camera->center.x = 0;
     camera->center.y = 0;

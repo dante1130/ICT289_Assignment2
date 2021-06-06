@@ -22,7 +22,7 @@ Vector3 subtract(Vector3 vector1, Vector3 vector2)
     return vector;
 }
 
-Vector3 multiply(Vector3 vector, int scalar)
+Vector3 multiply(Vector3 vector, float scalar)
 {
     vector.x *= scalar;
     vector.y *= scalar;
@@ -31,7 +31,7 @@ Vector3 multiply(Vector3 vector, int scalar)
     return vector;
 }
 
-Vector3 divide(Vector3 vector, int scalar)
+Vector3 divide(Vector3 vector, float scalar)
 {
     vector.x /= scalar;
     vector.y /= scalar;

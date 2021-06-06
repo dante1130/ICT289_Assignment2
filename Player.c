@@ -20,13 +20,14 @@ void drawGun(const Player *player)
 {
     glPushMatrix();
     glTranslatef(player->camera.eye.x + player->camera.center.x,
-                 player->camera.eye.y + player->camera.center.y,
+                 player->camera.eye.y + player->camera.center.y - 0.25,
                  player->camera.eye.z + player->camera.center.z);
+    glRotatef(-player->camera.yaw, 0, 1, 0);
+    glRotatef(player->camera.pitch, 1, 0, 0);
     glRotatef(90, 0, 1, 0);
     drawObject3D(player->weapon);
     glPopMatrix();
 }
-
 
 void shoot(Player *player, float time)
 {

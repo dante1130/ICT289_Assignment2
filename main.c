@@ -80,7 +80,6 @@ void objectsInit()
 
     vectorPush(&vectorObjects, &bottle);
     vectorPush(&vectorObjects, &vase);
-    // vectorPush(&vectorObjects, &gun);
 }
 
 void init()
@@ -147,6 +146,8 @@ void display()
 
     glColor3f(1.0, 1.0, 1.0);
     drawWalls();
+
+    drawGun(&player);
 
     glPushMatrix();
     glTranslatef(bench.physics.position.x, bench.physics.position.y, bench.physics.position.z);
@@ -251,7 +252,7 @@ void mouse(int button, int state, int x, int y)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        shoot(&player, 15);
+        shoot(&player, 20);
     }
 }
 

@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "VectorGameObject.h"
 #include "Wall.h"
+#include "Image.h"
 
 #define M_PI 3.14159265358979323846
 
@@ -47,6 +48,13 @@ VectorGameObject vectorObjects;
 // Temporary target rotation
 Vector3 tempRotate[2];
 
+Image image;
+
+void imageInit()
+{
+    readImage("image.raw", 320, 200, &image);
+}
+
 void objectsInit()
 {
     //Initialize player
@@ -70,19 +78,21 @@ void objectsInit()
     getBoundingBoxExtents(vase.obj3D, &vase.bBox.minExtent, &vase.bBox.maxExtent);
 
     // Initialize physics
-    SetPhysics(&bottle.physics, 1);
-    SetPhysics(&bench.physics, 10);
-    SetPhysics(&vase.physics, 1.5);
+    SetPhysics(&bottle.physics, 5);
+    SetPhysics(&bench.physics, 1);
+    SetPhysics(&vase.physics, 5);
 
     // Translate objects
     translateGameObj(&bench, 0, bench.bBox.maxExtent.y / 2, -9);
-    translateGameObj(&bottle, 0, (bottle.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
-    translateGameObj(&vase, 0.25, (vase.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
+    translateGameObj(&bottle, -0.5, (bottle.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
+    translateGameObj(&vase, 0.5, (vase.bBox.maxExtent.y / 2) + bench.bBox.maxExtent.y, bench.physics.position.z);
 
     vectorInit(&vectorObjects);
 
+
     vectorPush(&vectorObjects, &bottle);
     vectorPush(&vectorObjects, &vase);
+    // vectorPush(&vectorObjects, &gun);
 }
 
 void init()
@@ -91,8 +101,8 @@ void init()
     glLoadIdentity();
 
     // set attributes
-    glClearColor(0.67, 0.84, 0.9, 0.0); // blue background
-    glColor3f(0.0, 0.0, 1.0); // draw with color
+    glClearColor(0.67, 0.84, 0.9, 0.0); // black background
+    glColor3f(0.0, 0.0, 0.0); // draw with color
     glLineWidth(1.0);
 
     // Enable face culling
@@ -113,6 +123,7 @@ void init()
 
     // Initialise objects
     objectsInit();
+    imageInit();
 }
 
 void reshape(int w, int h)
@@ -147,8 +158,8 @@ void display()
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
-    //glColor3f(1.0, 1.0, 1.0);
-    //drawWalls();
+    glColor3f(1.0, 1.0, 1.0);
+    drawWalls();
 
     drawGun(&player);
 
@@ -161,6 +172,34 @@ void display()
     vectorDrawObj(&player.bullets);
 
     glutSwapBuffers(); // swap buffer
+}
+
+void exitDisplay()
+{
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT); // clear the window to background color specified by glClearColor()
+
+    drawImage(&image, 200, 320);
+    WriteCaptions();
+
+    glutSwapBuffers();
+    glFlush();
+}
+
+void exitScreenView()
+{
+    glClearColor(1.0, 1.0, 1.0, 0.0); // white background
+
+    glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	gluOrtho2D(0, windowWidth, 0, windowHeight);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glutDisplayFunc(exitDisplay);
+
+	glutPostRedisplay();
 }
 
 void keys(unsigned char key, int x, int y)
@@ -197,7 +236,8 @@ void keys(unsigned char key, int x, int y)
 
 
     case 27: // ESC key
-        exit(0);
+        glutSetCursor(GLUT_CURSOR_INHERIT); // Removes the cursor
+        exitScreenView();
         break;
     }
 
@@ -232,13 +272,14 @@ void mouseMove(int x, int y)
     prevX = x;
     prevY = y;
 
-    float sensitivity = 0.5;
+    float sensitivity = 1;
     xOffset *= sensitivity;
     yOffset *= sensitivity;
 
     player.camera.yaw += xOffset;
     player.camera.pitch += yOffset;
 
+    //
     if(player.camera.pitch > 89.0f)
     {
         player.camera.pitch = 89.0f;
@@ -298,14 +339,12 @@ void animate()
                 }
             }
 
-
             if (isBoxCollideSphere(bench.bBox, player.bullets.array[i].bSphere))
             {
                 //NewProjection(&player.bullets.array[i].physics, &bench.physics);
                 invertVelocityY(&player.bullets.array[i].physics);
             }
 
-            // floor
             if (player.bullets.array[i].physics.position.y <= 0.1)
             {
                 player.bullets.array[i].physics.position.y = 0.1;
@@ -316,24 +355,32 @@ void animate()
 
         for (int i = 0; i < vectorObjects.size; ++i)
         {
+            for (int j = 0; j < 9; ++j)
+            {
+                if(isBoxCollide(world.bPlanes[j], vectorObjects.array[i].bBox))
+                {
+                    WorldCollideProjection(&vectorObjects.array[i].physics, world.bPlanes[j]);
+                    GroundFriction(&vectorObjects.array[i].physics);
+                }
+            }
+
             if (isBoxCollide(vectorObjects.array[i].bBox, bench.bBox))
             {
                 vectorObjects.array[i].physics.accel.y = 0;
                 vectorObjects.array[i].physics.velocity.y = 0;
             }
-            else if(vectorObjects.array[i].physics.position.y <= 0.1)
-                {
+            else if(vectorObjects.array[i].physics.position.y <= 0.1){
+                //printf("Object hit floor\n");
                 vectorObjects.array[i].physics.position.y = 0.1;
                 invertVelocityY(&vectorObjects.array[i].physics);
                 GroundFriction(&vectorObjects.array[i].physics);
                 ReduceRotation(&vectorObjects.array[i].physics, &tempRotate[i]);
-
+                //printf("NEW rotation %d: x:%f, y:%f, z:%f\n",i, tempRotate[i].x, tempRotate[i].y, tempRotate[i].z);
             }
             else
             {
                 vectorObjects.array[i].physics.accel.y = vectorObjects.array[i].physics.gravity;
             }
-
             updateGameObj(&vectorObjects.array[i], delta);
             ApplyRotation(&vectorObjects.array[i].physics, tempRotate[i], delta);
         }

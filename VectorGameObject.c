@@ -12,9 +12,9 @@ void vectorPush(VectorGameObject *vector, const GameObject *gameObject)
     if (vector->size >= vector->capacity)
     {
         vector->capacity *= 1.5;
-        vector->array = realloc(vector->array, sizeof(GameObject) * (vector->capacity));
+        vector->array = (GameObject *) realloc(vector->array, vector->capacity * sizeof(GameObject));
     }
-s
+
     vector->array[vector->size] = *gameObject;
     ++vector->size;
 }

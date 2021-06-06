@@ -17,6 +17,10 @@ void SetPhysics(Physics3D *p, float mass)
     p->position.x = 0;
     p->position.y = 0;
     p->position.z = 0;
+
+    p->rotation.x = 0;
+    p->rotation.y = 0;
+    p->rotation.z = 0;
 }
 
 void CalcGravity(Physics3D *p, float time)
@@ -32,6 +36,32 @@ void invertVelocityY(Physics3D *p)
 void ChangePosition(Physics3D *p, float time)
 {
     p->position = add(p->position, multiply(p->velocity, time));
+}
+
+void NewProjection(Physics3D *obj1, Physics3D *obj2)
+{
+
+    float massSum = obj1->mass + obj2->mass;
+    Vector3 temp1 = obj1->velocity;
+    obj1->velocity = add(multiply(obj1->velocity, ((obj1->mass - obj2->mass) / massSum)),
+                         multiply(obj2->velocity, ((2 * obj2->mass) / massSum)));
+    obj2->velocity = add(multiply(obj2->velocity, ((obj2->mass - obj1->mass) / massSum)),
+                         multiply(temp1, ((2 * obj1->mass) / massSum)));
+
+
+}
+
+void WorldCollideProjection(Physics3D *obj, BoundingBox wall)
+{
+    Vector3 theta = subtract(wall.maxExtent, wall.minExtent);
+
+    if((theta.x < 0.2) && (theta.x > -0.2))
+        obj->velocity.x *= -0.9;
+    else if((theta.y < 0.2) && (theta.y > -0.2))
+        obj->velocity.y *= -0.9;
+    else if((theta.z < 0.2) && (theta.z > -0.2))
+        obj->velocity.z *= -0.9;
+
 }
 
 void GroundFriction(Physics3D *obj1)
@@ -116,27 +146,4 @@ void ApplyRotation(Physics3D *base, Vector3 tempRotate, float time)
         base->rotation.z += 3;
     if (base->rotation.z > tempRotate.z)
         base->rotation.z -= 3;
-}
-
-void NewProjection(Physics3D *obj1, Physics3D *obj2)
-{
-    float massSum = obj1->mass + obj2->mass;
-    Vector3 temp1 = obj1->velocity;
-    obj1->velocity = add(multiply(obj1->velocity, ((obj1->mass - obj2->mass) / massSum)),
-                         multiply(obj2->velocity, ((2 * obj2->mass) / massSum)));
-    obj2->velocity = add(multiply(obj2->velocity, ((obj2->mass - obj1->mass) / massSum)),
-                         multiply(temp1, ((2 * obj1->mass) / massSum)));
-}
-
-void WorldCollideProjection(Physics3D *obj, BoundingBox wall)
-{
-    Vector3 theta = subtract(wall.maxExtent, wall.minExtent);
-
-    if((theta.x < 0.2) && (theta.x > -0.2))
-        obj->velocity.x *= -0.9;
-    else if((theta.y < 0.2) && (theta.y > -0.2))
-        obj->velocity.y *= -0.9;
-    else if((theta.z < 0.2) && (theta.z > -0.2))
-        obj->velocity.z *= -0.9;
-
 }

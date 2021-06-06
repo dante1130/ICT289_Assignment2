@@ -15,6 +15,7 @@ void updateGameObj(GameObject * gameObject, float time)
     gameObject->bSphere.center = gameObject->physics.position;
 }
 
+
 void translateGameObj(GameObject * gameObject, float x, float y, float z)
 {
     Vector3 translate;

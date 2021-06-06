@@ -5,6 +5,8 @@ void playerInit(Player *player)
     player->bullet = readOFFFile("Objects/ball.off");
     player->weapon = readOFFFile("Objects/gun2.off");
 
+    setColor(&player->weapon, 0.35, 0.35, 0.35);
+
     ResetCamera(&player->camera);
     vectorInit(&player->bullets);
 }
@@ -13,7 +15,7 @@ void bulletInit(GameObject *bullet)
 {
     SetPhysics(&bullet->physics, 1);
     getBoundingSphere(bullet->obj3D, &bullet->bSphere.center, &bullet->bSphere.radius);
-    setColor(&bullet->obj3D, 0, 0, 1.0);
+    setColor(&bullet->obj3D, 1, 0, 0);
 }
 
 void drawGun(const Player *player)

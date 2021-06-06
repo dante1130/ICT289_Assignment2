@@ -45,6 +45,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="GameObject.h" />
+		<Unit filename="Image.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Image.h" />
+		<Unit filename="ImgLoader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ImgLoader.h" />
 		<Unit filename="Object3D.c">
 			<Option compilerVar="CC" />
 		</Unit>

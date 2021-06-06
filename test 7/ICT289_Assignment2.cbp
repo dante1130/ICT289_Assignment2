@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ICT289_Assignment2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ICT289_Assignment2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ICT289_Assignment2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="BoundingBox.h" />
+		<Unit filename="BoundingSphere.h" />
+		<Unit filename="Camera.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Camera.h" />
+		<Unit filename="Collision.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Collision.h" />
+		<Unit filename="GameObject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameObject.h" />
+		<Unit filename="Object3D.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Object3D.h" />
+		<Unit filename="OffLoader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="OffLoader.h" />
+		<Unit filename="Physics3D.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Physics3D.h" />
+		<Unit filename="Player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Player.h" />
+		<Unit filename="Vector3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Vector3.h" />
+		<Unit filename="VectorGameObject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="VectorGameObject.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,204 @@
+# depslib dependency file v1.0
+1622649780 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\main.c
+	<GL/freeglut.h>
+	<stdbool.h>
+	"Camera.h"
+	"OffLoader.h"
+	"GameObject.h"
+	"Player.h"
+	"VectorGameObject.h"
+
+1619693153 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
+	"Vector3.h"
+
+1619693150 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+	<math.h>
+
+1622559525 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+	<stdio.h>
+	"Object3D.h"
+
+1622559534 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+	<stdlib.h>
+	<math.h>
+	<GL/freeglut.h>
+	"Vector3.h"
+
+1619086061 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.c
+	"OffLoader.h"
+
+1616481518 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.h
+	<stdio.h>
+	"Object3D.h"
+
+1619068646 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+	"Camera.h"
+
+1618894357 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
+	"Vector3.h"
+
+1616735179 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.c
+	"Camera.h"
+
+1616735175 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\camera.h
+	"Vector3.h"
+
+1616665825 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.h
+
+1618323155 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.c
+	<stdio.h>
+	"Object3D.h"
+
+1616481539 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\object3d.h
+	<stdlib.h>
+	<math.h>
+	<GL/freeglut.h>
+	"Vector3.h"
+
+1616480495 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.c
+	"OffLoader.h"
+
+1616481518 c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\offloader.h
+	<stdio.h>
+	"Object3D.h"
+
+1616481493 source:c:\users\andre\onedrive\mu\ict289\assignment2\ict289_assignment2\vector3.c
+	"Vector3.h"
+
+1618893664 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.c
+	"BoundingSphere.h"
+
+1618895005 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingsphere.h
+	"Vector3.h"
+
+1618885689 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingbox.c
+	"BoundingBox.h"
+
+1618894998 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\boundingbox.h
+	"Vector3.h"
+
+1622649727 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.h
+	"Vector3.h"
+	"Object3D.h"
+	"Collision.h"
+	"Physics3D.h"
+
+1618910107 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.c
+	"Collision.h"
+
+1618906925 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\collision.h
+	<gl/freeglut.h>
+	<stdbool.h>
+	"BoundingBox.h"
+	"BoundingSphere.h"
+
+1619693194 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.h
+	"Vector3.h"
+
+1622649791 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\physics3d.c
+	"Physics3D.h"
+
+1622646259 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\gameobject.c
+	"GameObject.h"
+
+1622639660 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\player.h
+	<gl/freeglut.h>
+	"Camera.h"
+	"GameObject.h"
+	"VectorGameObject.h"
+	"OffLoader.h"
+
+1622648443 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\player.c
+	"Player.h"
+
+1622648376 source:c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vectorgameobject.c
+	"VectorGameObject.h"
+
+1622544631 c:\users\user\onedrive\mu\ict289\assignment2\ict289_assignment2\vectorgameobject.h
+	"GameObject.h"
+
+1622650253 source:c:\second year\ict289\test\test 7\camera.c
+	"Camera.h"
+
+1622650253 c:\second year\ict289\test\test 7\camera.h
+	"Vector3.h"
+
+1622650253 c:\second year\ict289\test\test 7\vector3.h
+	<math.h>
+
+1622650253 source:c:\second year\ict289\test\test 7\collision.c
+	"Collision.h"
+
+1622650253 c:\second year\ict289\test\test 7\collision.h
+	<gl/freeglut.h>
+	<stdbool.h>
+	"BoundingBox.h"
+	"BoundingSphere.h"
+
+1622650253 c:\second year\ict289\test\test 7\boundingbox.h
+	"Vector3.h"
+
+1622650253 c:\second year\ict289\test\test 7\boundingsphere.h
+	"Vector3.h"
+
+1622726241 source:c:\second year\ict289\test\test 7\gameobject.c
+	"GameObject.h"
+
+1622650253 c:\second year\ict289\test\test 7\gameobject.h
+	"Vector3.h"
+	"Object3D.h"
+	"Collision.h"
+	"Physics3D.h"
+
+1622650253 c:\second year\ict289\test\test 7\object3d.h
+	<stdlib.h>
+	<math.h>
+	<GL/freeglut.h>
+	"Vector3.h"
+
+1622794319 c:\second year\ict289\test\test 7\physics3d.h
+	"Vector3.h"
+	"Object3D.h"
+
+1622795286 source:c:\second year\ict289\test\test 7\main.c
+	<GL/freeglut.h>
+	<stdbool.h>
+	"Camera.h"
+	"OffLoader.h"
+	"GameObject.h"
+	"Player.h"
+	"VectorGameObject.h"
+
+1622650253 c:\second year\ict289\test\test 7\offloader.h
+	<stdio.h>
+	"Object3D.h"
+
+1622650253 c:\second year\ict289\test\test 7\player.h
+	<gl/freeglut.h>
+	"Camera.h"
+	"GameObject.h"
+	"VectorGameObject.h"
+	"OffLoader.h"
+
+1622650253 c:\second year\ict289\test\test 7\vectorgameobject.h
+	"GameObject.h"
+
+1622727961 source:c:\second year\ict289\test\test 7\object3d.c
+	<stdio.h>
+	"Object3D.h"
+
+1622650253 source:c:\second year\ict289\test\test 7\offloader.c
+	"OffLoader.h"
+
+1622650253 source:c:\second year\ict289\test\test 7\player.c
+	"Player.h"
+
+1622650253 source:c:\second year\ict289\test\test 7\vector3.c
+	"Vector3.h"
+
+1622728855 source:c:\second year\ict289\test\test 7\vectorgameobject.c
+	"VectorGameObject.h"
+
+1622795012 source:c:\second year\ict289\test\test 7\physics3d.c
+	"Physics3D.h"
+
